@@ -1,0 +1,19 @@
+{
+  "name": "proyecto-magento",
+  "version": "1.0.0",
+  "description": "",
+  "main": "open_browser.js",
+  "scripts": {
+    "test": "cucumber-js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@cucumber/cucumber": "^10.9.0",
+    "chai": "^5.1.1",
+    "chromedriver": "^127.0.3",
+    "selenium-webdriver": "^4.23.0",
+    "log4js": "^6.9.1"
+  }
+}

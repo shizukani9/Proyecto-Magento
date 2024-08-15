@@ -1,0 +1,13 @@
+{
+    "browser":{
+        "name": "browserstack",
+        "headless": false,
+        "timeout": 30000,
+        "maxWindows": true,
+        "resolution": {
+            "width": 1280,
+            "heigth": 720
+        },
+        "parallel": false
+    }
+}
