@@ -5,8 +5,8 @@
             "username": "<email>",
             "password": ""
         },
-        "userMember01":{
-            "name": "<check name value in user profile>",
+        "user":{
+            "first": "<check name value in user profile>",
             "username": "<email>",
             "password": ""
         }
