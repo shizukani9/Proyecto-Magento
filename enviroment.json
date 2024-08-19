@@ -1,14 +1,16 @@
 {
-    "prod":{
+    "demo":{
         "urlUI":"https://magento2-demo.magebit.com/",
         "userAdmin":{
             "username": "<email>",
             "password": ""
         },
         "user":{
-            "first": "<check name value in user profile>",
-            "username": "<email>",
-            "password": ""
+            "firstName": "Erika",
+            "lastName": "Mamani",
+            "email": "erika@gmail.com",
+            "password": "Erika12!",
+            "confirmPassword": "Erika12!"
         }
     }
 }
