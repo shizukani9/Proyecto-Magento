@@ -1,12 +1,13 @@
 {
     "demo":{
         "urlUI":"https://magento2-demo.magebit.com/",
+        "apiToken": "",
         "userAdmin":{
-            "username": "<email>",
+            "username": "<username>",
             "password": ""
         },
         "user":{
-            "firstName": "<name>",
+            "firstName": "<firstName>",
             "lastName": "<lastName>",
             "email": "<email>",
             "password": "",
