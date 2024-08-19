@@ -11,8 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "@cucumber/cucumber": "^10.8.0",
-    "chromedriver": "^127.0.1",
+    "axios": "^1.7.4",
     "chai": "^4.4.1",
+    "chromedriver": "^127.0.1",
     "log4js": "^6.9.1",
     "selenium-webdriver": "^4.23.0"
   }
