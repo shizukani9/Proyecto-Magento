@@ -51,5 +51,5 @@ Before( { tags: "@login" }, async function(scenario){
 
 
 AfterAll({ tags: "@ui" },async function(){
-    //await DriverFactory.closeDriver();
+    await DriverFactory.closeDriver();
 });

@@ -6,11 +6,11 @@
             "password": ""
         },
         "user":{
-            "firstName": "Erika",
-            "lastName": "Mamani",
-            "email": "erika@gmail.com",
-            "password": "Erika12!",
-            "confirmPassword": "Erika12!"
+            "firstName": "<name>",
+            "lastName": "<lastName>",
+            "email": "<email>",
+            "password": "",
+            "confirmPassword": ""
         }
     }
 }
