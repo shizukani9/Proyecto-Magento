@@ -1,6 +1,6 @@
 {
     "demo":{
-        "urlUI":"https://magento2-demo.magebit.com/",
+        "url":"https://magento2-demo.magebit.com/",
         "apiToken": "psz0zk8oqeetwpgt5i0x91a1jprqfgch",
         "userAdmin":{
             "username": "magebit",

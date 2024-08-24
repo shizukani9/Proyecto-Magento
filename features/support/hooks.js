@@ -8,6 +8,7 @@ const CreateAnAccountPage = require('../../main/ui/create_an_account_page');
 const MyAccountCustomer = require("../../main/ui/my_account_customer_page");
 const { until, Key } = require("selenium-webdriver");
 var {setDefaultTimeout} = require('@cucumber/cucumber');
+const UserService = require('../../main/api/userService');
 
 
 setDefaultTimeout(60 * 1000);
@@ -42,41 +43,25 @@ Before({ tags: "@createAccount" }, async function() {
     await createAccountButton.click();
 });
 
-
-
-// Hook para eliminar el usuario recién creado
 After({ tags: "@deleteAccount" }, async function() {
     console.log("Starting Account Deletion Process");
 
-    // Preparar los datos para la solicitud DELETE
+    const userService = new UserService();
     const email = environment.demo.user.email;
-    const token = environment.demo.apiToken; // Asumiendo que tienes el token de API en environment.json
-    const url = `https://magento2-demo.magebit.com/rest/V1/customers/search?searchCriteria[filterGroups][0][filters][0][field]=email&searchCriteria[filterGroups][0][filters][0][value]=${email}`;
 
-    // Realizar la solicitud DELETE usando Axios
     try {
-        const response = await axios.get(url, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
-
-        if (response.data.items.length > 0) {
-            const userId = response.data.items[0].id;
-            const deleteUrl = `https://magento2-demo.magebit.com/rest/V1/customers/${userId}`;
-            await axios.delete(deleteUrl, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
+        const userId = await userService.getUserIdByEmail(email);
+        if (userId) {
+            await userService.deleteUserById(userId);
             console.log(`User with email ${email} deleted successfully.`);
         } else {
             console.log(`User with email ${email} not found.`);
         }
     } catch (error) {
-        console.error(`Error deleting user: ${error}`);
+        console.error("Account deletion process failed.", error);
     }
 });
+
 
 
 
