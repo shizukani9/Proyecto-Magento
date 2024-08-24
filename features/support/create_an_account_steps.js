@@ -63,5 +63,4 @@ Then('Delete customer', async function (dataTable) {
         }
     });
     console.log(deleteResponse);
-    
 });

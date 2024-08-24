@@ -5,7 +5,7 @@ const configuration = require("../../configuration.json");
 const DriverFactory = require("../../core/ui/driverFactory");
 const CustomerloginPage = require("../../main/ui/customer_login_page");
 const CreateAnAccountPage = require('../../main/ui/create_an_account_page');
-const MyAccountCustomer = require("../../main/ui/my_account_customer_page");
+const MyAccountCustomerPage = require("../../main/ui/my_account_customer_page");
 const { until, Key } = require("selenium-webdriver");
 var {setDefaultTimeout} = require('@cucumber/cucumber');
 const UserService = require('../../main/api/userService');
@@ -22,6 +22,19 @@ BeforeAll( { tags: "@ui" }, async function(){
     await this.driver.manage().window().setRect(configuration.browser.resolution);
 });
 
+Before( { tags: "@login" }, async function(scenario){
+    console.log("Test scenario: " + scenario.pickle.name);
+    if ((loginHook === undefined) || (loginHook === false)){
+        console.log("Hook: Starting Login");
+        const emailInput = await DriverFactory.myDriver.wait(until.elementLocated(CustomerloginPage.emailInput));
+        const passwordInput = await DriverFactory.myDriver.wait(until.elementLocated(CustomerloginPage.passwordInput));
+        const signInButton = await DriverFactory.myDriver.wait(until.elementLocated(CustomerloginPage.signInButton));
+        await emailInput.sendKeys(environment.demo.user.email);
+        await passwordInput.sendKeys(environment.demo.user.password);
+        await signInButton.click();
+    }
+    loginHook = true;
+});
 
 Before({ tags: "@createAccount" }, async function() {
     console.log("Starting Create Account Process");
@@ -53,20 +66,21 @@ After({ tags: "@deleteAccount" }, async function() {
     }
 });
 
-Before( { tags: "@login" }, async function(scenario){
-    console.log("Test scenario: " + scenario.pickle.name);
-    if ((loginHook === undefined) || (loginHook === false)){
-        console.log("Hook: Starting Login");
-        const emailInput = await DriverFactory.myDriver.wait(until.elementLocated(CustomerloginPage.emailInput));
-        const passwordInput = await DriverFactory.myDriver.wait(until.elementLocated(CustomerloginPage.passwordInput));
-        const signInButton = await DriverFactory.myDriver.wait(until.elementLocated(CustomerloginPage.signInButton));
-        await emailInput.sendKeys(environment.demo.user.email);
-        await passwordInput.sendKeys(environment.demo.user.password);
-        await signInButton.click();
-    }
-    loginHook = true;
+After({ tags: "@signOut" }, async function() {
+    console.log("Starting Sign Out Process");
+
+    await DriverFactory.myDriver.get("https://magento2-demo.magebit.com/customer/account/");
+    await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/customer/account/"), configuration.browser.timeout);
+
+    const menuToggleButton = await DriverFactory.myDriver.wait(until.elementLocated(MyAccountCustomerPage.customerMenuToggleButton), configuration.browser.timeout);
+    await menuToggleButton.click();
+    
+    const signOutLink = await DriverFactory.myDriver.wait(until.elementLocated(MyAccountCustomerPage.signOutLink), configuration.browser.timeout);
+    await signOutLink.click();
+    
+    console.log("Sign Out completed successfully.");  
 });
 
 AfterAll({ tags: "@ui" },async function(){
-    //await DriverFactory.closeDriver();
+    await DriverFactory.closeDriver();
 });
