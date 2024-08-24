@@ -1,4 +1,4 @@
-@ui
+
 Feature: Create an Account
 
 Scenario: Create an account with valid data

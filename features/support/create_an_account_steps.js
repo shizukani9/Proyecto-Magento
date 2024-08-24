@@ -4,6 +4,8 @@ let chai = require('chai');
 let expect = chai.expect;
 const axios = require('axios');
 const CreateAnAccountPage = require('../../main/ui/create_an_account_page');
+const environment = require("../../environment.json");
+const configuration = require("../../configuration.json");
 const { until } = require('selenium-webdriver');
 
 Given('I set the create account with:', async function (dataTable) {
@@ -61,5 +63,5 @@ Then('Delete customer', async function (dataTable) {
         }
     });
     console.log(deleteResponse);
-
+    
 });
