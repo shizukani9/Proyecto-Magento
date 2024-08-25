@@ -1,5 +1,5 @@
 {
-  "name": "proyecto-magento",
+  "name": "magento",
   "version": "1.0.0",
   "description": "",
   "main": "open_browser.js",
@@ -10,10 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@cucumber/cucumber": "^10.9.0",
-    "chai": "^5.1.1",
-    "chromedriver": "^127.0.3",
-    "selenium-webdriver": "^4.23.0",
-    "log4js": "^6.9.1"
+    "@cucumber/cucumber": "^10.8.0",
+    "axios": "^1.7.4",
+    "chai": "^4.4.1",
+    "chromedriver": "^127.0.1",
+    "log4js": "^6.9.1",
+    "selenium-webdriver": "^4.23.0"
   }
 }

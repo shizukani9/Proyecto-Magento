@@ -3,8 +3,7 @@ const configuration = require("../../configuration.json");
 const ChromeDriver = require("./chromedriver");
 
 const browserStrategy ={
-    chrome: ChromeDriver,
-    browserstack: BrowserStackDriver  // <- AUMENTADO
+    chrome: ChromeDriver
 }
 
 module.exports = class DriverFactory{
