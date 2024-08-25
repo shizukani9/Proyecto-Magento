@@ -2,7 +2,7 @@
     "browser":{
         "name": "chrome",
         "headless": false,
-        "timeout": 30000,
+        "timeout": 40000,
         "maxWindows": false,
         "resolution": {
             "width": 1280,
