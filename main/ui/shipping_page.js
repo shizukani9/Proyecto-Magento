@@ -13,7 +13,7 @@ class ShippingPage {
     shippingMethodRadio = By.css('input[type="radio"][value="flatrate_flatrate"]');
     shippingMethodTableRateRadio = By.css('input[type="radio"][value="tablerate_bestway"]');
     nextButton = By.css('button[data-role="opc-continue"]');
-    link = https://magento2-demo.magebit.com/checkout/#shipping ;
+    //link = https://magento2-demo.magebit.com/checkout/#shipping ;
 }
 
 module.exports = new ShippingPage();
