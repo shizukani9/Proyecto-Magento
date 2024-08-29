@@ -1,7 +1,8 @@
 {
     "default":{
         "format":[
-            "html:reports/cucumber-report.html"
+            "html:reports/cucumber-report.html",
+            "json:reports/cucumber_report.json"
         ]
     }
 }

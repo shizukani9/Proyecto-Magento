@@ -2,11 +2,11 @@
     "browser":{
         "name": "chrome",
         "headless": false,
-        "timeout": 40000,
+        "timeout": 50000,
         "maxWindows": false,
         "resolution": {
-            "width": 1280,
-            "heigth": 720
+            "width": 1366,
+            "heigth": 768
         }
     }
 }

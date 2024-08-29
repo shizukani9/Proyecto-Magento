@@ -6,9 +6,10 @@ const DriverFactory = require("../../core/ui/driverFactory");
 const CustomerloginPage = require("../../main/ui/customer_login_page");
 const CreateAnAccountPage = require('../../main/ui/create_an_account_page');
 const MyAccountCustomerPage = require("../../main/ui/my_account_customer_page");
-const { until, Key } = require("selenium-webdriver");
+const { until, Key, By } = require("selenium-webdriver");
 var {setDefaultTimeout} = require('@cucumber/cucumber');
 const UserService = require('../../main/api/userService');
+const allure = require('allure-cucumberjs');
 
 setDefaultTimeout(60 * 1000);
 let loginHook = false;
@@ -18,7 +19,7 @@ BeforeAll( { tags: "@ui" }, async function(){
     this.driver = await new DriverFactory();
     console.log("Starting Browser");
     await this.driver.get("https://magento2-demo.magebit.com/");
-    await this.driver.manage().window().setRect(configuration.browser.resolution);
+    await this.driver.manage().window().setRect(configuration.browser.resolution.heigth, configuration.browser.resolution.width);
 });
 
 Before( { tags: "@login" }, async function(scenario){
@@ -58,22 +59,73 @@ Before({ tags: "@createAccount" }, async function() {
     await createAccountButton.click();
 });
 
-After({ tags: "@signOut" }, async function() {
-    console.log("Starting Sign Out Process");
+After({ tags: "@signOut" }, async function () {
+    console.log("Iniciando el proceso de cierre de sesión...");
 
-    await DriverFactory.myDriver.get("https://magento2-demo.magebit.com/customer/account/");
-    await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/customer/account/"), configuration.browser.timeout);
+    try {
+        await DriverFactory.myDriver.get("https://magento2-demo.magebit.com/customer/account/");
+        console.log("Página de cuenta de cliente cargada.");
 
-    const menuToggleButton = await DriverFactory.myDriver.wait(until.elementLocated(MyAccountCustomerPage.customerMenuToggleButton), configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(menuToggleButton), configuration.browser.timeout);
-    await menuToggleButton.click();
+        await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/customer/account/"), configuration.browser.timeout);
 
-    const signOutLink = await DriverFactory.myDriver.wait(until.elementLocated(MyAccountCustomerPage.signOutLink), configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(signOutLink), configuration.browser.timeout);
-    await signOutLink.click();
-    
-    console.log("Sign Out completed successfully.");  
+        const menuToggleSpan = await DriverFactory.myDriver.wait(until.elementLocated(By.css('span.customer-name')), configuration.browser.timeout);
+        console.log("Elemento span localizado.");
+
+        // Estrategia 1: Intentar clic en el span
+        await DriverFactory.myDriver.wait(until.elementIsVisible(menuToggleSpan), configuration.browser.timeout);
+        await DriverFactory.myDriver.wait(until.elementIsEnabled(menuToggleSpan), configuration.browser.timeout);
+        await menuToggleSpan.click();
+        console.log("Clic en el span realizado.");
+
+        // Esperar un poco antes de verificar el estado
+        await DriverFactory.myDriver.sleep(1000);
+
+        let expanded = await menuToggleSpan.getAttribute("aria-expanded");
+        console.log("Estado de aria-expanded después de hacer clic en el span:", expanded);
+
+        if (expanded !== "true") {
+            console.log("El menú no se desplegó con el clic en el span, intentando con JavaScript...");
+
+            // Estrategia 2: Forzar el clic con JavaScript
+            await DriverFactory.myDriver.executeScript("arguments[0].click();", menuToggleSpan);
+
+            // Esperar un poco antes de verificar el estado
+            await DriverFactory.myDriver.sleep(1000);
+
+            expanded = await menuToggleSpan.getAttribute("aria-expanded");
+            console.log("Estado de aria-expanded después de hacer clic con JavaScript en el span:", expanded);
+
+            if (expanded !== "true") {
+                console.log("El menú no se desplegó con JavaScript, intentando simular movimiento del mouse...");
+
+                // Estrategia 3: Simular movimiento del mouse
+                const actions = DriverFactory.myDriver.actions({ bridge: true });
+                await actions.move({ origin: menuToggleSpan }).perform();
+                await DriverFactory.myDriver.sleep(500); // Asegúrate de que el menú tenga tiempo de desplegarse
+
+                await menuToggleSpan.click();
+                console.log("Clic en el span realizado después del movimiento del mouse.");
+
+                expanded = await menuToggleSpan.getAttribute("aria-expanded");
+                console.log("Estado de aria-expanded después de mover el mouse y hacer clic en el span:", expanded);
+
+                if (expanded !== "true") {
+                    throw new Error("El menú no se desplegó correctamente después de intentar todas las estrategias.");
+                }
+            }
+        }
+
+        const signOutLink = await DriverFactory.myDriver.wait(until.elementLocated(MyAccountCustomerPage.signOutLink), configuration.browser.timeout);
+        await DriverFactory.myDriver.wait(until.elementIsVisible(signOutLink), configuration.browser.timeout);
+        await DriverFactory.myDriver.wait(until.elementIsEnabled(signOutLink), configuration.browser.timeout);
+        await signOutLink.click();
+        console.log("Cierre de sesión completado con éxito.");
+    } catch (error) {
+        console.error("Error durante el proceso de cierre de sesión:", error);
+        throw error;
+    }
 });
+
 
 After({ tags: "@deleteAccount" }, async function() {
     console.log("Starting Account Deletion Process");
@@ -86,6 +138,16 @@ After({ tags: "@deleteAccount" }, async function() {
         console.log(`User with email ${email} deleted successfully.`);
     } else {
         console.log(`User with email ${email} not found.`);
+    }
+});
+
+After(async function(scenario) {
+    console.log("allure generating");
+    if (scenario.result.status === 'failed') {
+        const screenshot = await DriverFactory.myDriver.takeScreenshot();
+        console.log("Screenshot generated");
+        console.log(screenshot);
+        allure.createAttachment('Screenshot', Buffer.from(screenshot, 'base64'), 'image/png');
     }
 });
 
