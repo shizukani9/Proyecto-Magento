@@ -1,5 +1,11 @@
 @ui
-Feature: Carrito de Compras 
+Feature: Adding Products to Cart
+
+@funcional_Positivo 
+Scenario: Verify Adding a Product to the Cart
+    Given I navigate to a product in the store
+    When I click on Add to Cart
+    Then the product is correctly added to my cart
 
 @funcional_Positivo @GC-1
 Scenario: GC-1 Verificar que cuando se añade un producto al carrito entonces se actualiza la cantidad y el precio total
