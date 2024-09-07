@@ -6,6 +6,7 @@ const axios = require('axios');
 const YogaPage = require('../../main/ui/yoga_page');
 const HomePage = require('../../main/ui/home_page');
 const CheckoutCarPage = require('../../main/ui/checkout_car_page');
+const DataGenerator = require('../../utils/dataGenerator');
 const environment = require("../../environment.json");
 const configuration = require("../../configuration.json");
 const { until, By } = require('selenium-webdriver');
@@ -59,7 +60,7 @@ Then('El usuario modifica la cantidad de uno de los productos', async function (
     //await cartQuantityInput.clear();
 
     // Generar un número aleatorio entre 1 y 10
-    const randomQuantity = Math.floor(Math.random() * 9) + 1;
+    const randomQuantity = DataGenerator.generateRandomNumber(1);
 
     // Ingresar el número aleatorio en el campo de cantidad
     await cartQuantityInput.sendKeys(randomQuantity.toString());
