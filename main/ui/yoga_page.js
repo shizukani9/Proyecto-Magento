@@ -1,12 +1,9 @@
 const { By } = require("selenium-webdriver");
 
 class YogaPage {
-    listViewModeLink = By.css('a.modes-mode.mode-list');
-    addToCartButton = By.css('button.action.tocart.primary');
-    firstAddToCartButton  = By.xpath('(//button[@title="Add to Cart" and contains(@class, "tocart primary")])[1]');
-    secondAddToCartButton = By.xpath('(//button[@title="Add to Cart" and contains(@class, "tocart primary")])[2]');
-    addedToCartMessage = By.css('div[data-bind="html: $parent.prepareMessageForHtml(message.text)"]');
-    myCartLink = By.css('a.action.showcart');
+    listViewModeLink = By.xpath('/html/body/div[2]/main/div[4]/div[1]/div[2]/div[1]/a');
+    firstAddToCartButton  = By.xpath('/html/body/div[2]/main/div[4]/div[1]/div[3]/ol/li[1]/div/div/div[3]/div[1]/div[1]/form/button');
+    secondAddToCartButton = By.xpath('/html/body/div[2]/main/div[4]/div[1]/div[3]/ol/li[2]/div/div/div[3]/div[1]/div[1]/form/button');
     
     rivalFieldMessengerLink = By.css('a[href="https://magento2-demo.magebit.com/rival-field-messenger.html"]');
     overnightDuffleLink = By.css('a[href="https://magento2-demo.magebit.com/overnight-duffle.html"]');

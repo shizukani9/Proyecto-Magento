@@ -49,23 +49,14 @@ Then('La cantidad de productos en el carrito debe actualizarse', async function 
 
 Then('El usuario modifica la cantidad de uno de los productos', async function () {
     console.log("El usuario modifica la cantidad de uno de los productos");
-    // Hacer un pequeño scroll hacia abajo
     await DriverFactory.myDriver.executeScript("window.scrollBy(0, 200);");
-    // Localizar el input de la cantidad
+ 
     const cartQuantityInput = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutCarPage.cartQuantityInput),configuration.browser.extendedTimeout);
     await DriverFactory.myDriver.wait(until.elementIsVisible(cartQuantityInput), configuration.browser.extendedTimeout);
     await DriverFactory.myDriver.wait(until.elementIsEnabled(cartQuantityInput), configuration.browser.extendedTimeout);
 
-    // Vaciar el campo de cantidad
-    //await cartQuantityInput.clear();
-
-    // Generar un número aleatorio entre 1 y 10
     const randomQuantity = DataGenerator.generateRandomNumber(1);
-
-    // Ingresar el número aleatorio en el campo de cantidad
     await cartQuantityInput.sendKeys(randomQuantity.toString());
-
-    // Esperar la actualización de la página o el carrito
     await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/checkout/cart/"), configuration.browser.extendedTimeout);
     
     const updateCartButton = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutCarPage.updateCartButton),configuration.browser.extendedTimeout);
@@ -79,8 +70,8 @@ Then('El usuario modifica la cantidad de uno de los productos', async function (
 
 Then('El precio total del carrito debe actualizarse correctamente', async function () {
     console.log("El precio total del carrito debe actualizarse correctamente");
-    await DriverFactory.myDriver.sleep(5000); 
-    // Verificar visibilidad, habilitación y localización del subtotal
+    await DriverFactory.myDriver.sleep(7000); 
+
     const subtotalPriceElement1 = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutCarPage.subtotalPriceElement1),configuration.browser.extendedTimeout);
     await DriverFactory.myDriver.wait(until.elementIsVisible(subtotalPriceElement1), configuration.browser.extendedTimeout);
     await DriverFactory.myDriver.wait(until.elementIsEnabled(subtotalPriceElement1), configuration.browser.extendedTimeout);
@@ -91,10 +82,7 @@ Then('El precio total del carrito debe actualizarse correctamente', async functi
     await DriverFactory.myDriver.wait(until.elementIsEnabled(subtotalPriceElement2), configuration.browser.extendedTimeout);
     const subtotalText2 = await subtotalPriceElement2.getText();
 
-    // Convertir los subtotales a números eliminando el símbolo de dólar
     const subtotal1 = parseFloat(subtotalText1.replace('$', '').trim());
     const subtotal2 = parseFloat(subtotalText2.replace('$', '').trim());
-
-    // Comparar los subtotales
     expect(subtotal1).to.equal(subtotal2, `El subtotal 1 (${subtotal1}) no coincide con el subtotal 2 (${subtotal2})`);
 });
