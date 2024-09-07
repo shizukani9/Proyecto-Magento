@@ -51,7 +51,6 @@ Then('La cantidad de productos en el carrito debe actualizarse en la pagina Chec
 Then('El usuario modifica la cantidad de uno de los productos', async function () {
     console.log("El usuario modifica la cantidad de uno de los productos");
     
- 
     const cartQuantityInput = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutCarPage.cartQuantityInput),configuration.browser.extendedTimeout);
     await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", cartQuantityInput);
     await DriverFactory.myDriver.wait(until.elementIsVisible(cartQuantityInput), configuration.browser.extendedTimeout);
@@ -111,4 +110,44 @@ Then('El producto debe desaparecer del listado, se muestra un mensaje de confirm
     const messageText = await emptyCartMessage.getText();
     const expectedMessage = "You have no items in your shopping cart.";
     expect(messageText.trim()).to.equal(expectedMessage, `El mensaje obtenido fue: "${messageText}", pero se esperaba: "${expectedMessage}".`);
+});
+
+Then('El usuario confirma el producto para la compra', async function () {
+    console.log("El usuario confirma el producto para la compra");
+    
+});
+
+Then('El usuario ingresa una dirección de envío válida', async function () {
+    console.log("El usuario ingresa una dirección de envío válida");
+    
+});
+
+Then('El usuario guarda la dirección', async function () {
+    console.log("El usuario guarda la dirección");
+    
+});
+
+Then('El usuario ingresa el código de descuento en el campo Código de descuento', async function () {
+    console.log("El usuario ingresa el código de descuento en el campo Código de descuento");
+    
+});
+
+Then('El usuario hace clic en Aplicar', async function () {
+    console.log("El usuario hace clic en Aplicar");
+    
+});
+
+Then('El precio total del carrito se actualiza con el descuento aplicado', async function () {
+    console.log("El precio total del carrito se actualiza con el descuento aplicado");
+    
+});
+
+Then('El usuario completa la compra', async function () {
+    console.log("El usuario completa la compra");
+    
+});
+
+Then('El usuario ve un mensaje de confirmación de compra', async function () {
+    console.log("El usuario ve un mensaje de confirmación de compra");
+    
 });
