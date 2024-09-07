@@ -28,16 +28,20 @@ Given('El usuario navega a página de Yoga Collection', async function () {
 
 When('El usuario añade un producto al carrito', async function () {
     console.log("El usuario añade un producto al carrito");
+
     const listViewModeLinkButton = await DriverFactory.myDriver.wait(until.elementLocated(YogaPage.listViewModeLink), configuration.browser.timeout);
+    await DriverFactory.myDriver.wait(until.elementIsVisible(listViewModeLinkButton), configuration.browser.timeout);
     await DriverFactory.myDriver.wait(until.elementIsEnabled(listViewModeLinkButton), configuration.browser.timeout);
-    await listViewModeLinkButton.click();
+    await listViewModeLinkButton.click(); 
+
     const firstAddToCartButton = await DriverFactory.myDriver.wait(until.elementLocated(YogaPage.firstAddToCartButton), configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(firstAddToCartButton), configuration.browser.timeout);
+    await DriverFactory.myDriver.wait(until.elementIsVisible(firstAddToCartButton), configuration.browser.timeout); 
+    await DriverFactory.myDriver.wait(until.elementIsEnabled(firstAddToCartButton), configuration.browser.timeout); 
     await firstAddToCartButton.click();
 });
 
-Then('La cantidad de productos en el carrito debe actualizarse', async function () {
-    console.log("La cantidad de productos en el carrito debe actualizarse");
+Then('La cantidad de productos en el carrito debe actualizarse en la pagina Checkout cart', async function () {
+    console.log("La cantidad de productos en el carrito debe actualizarse en la pagina Checkout cart");
     await DriverFactory.myDriver.get("https://magento2-demo.magebit.com/checkout/cart/");
     await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/checkout/cart/"), configuration.browser.timeout);
 
@@ -87,12 +91,25 @@ Then('El precio total del carrito debe actualizarse correctamente', async functi
     expect(subtotal1).to.equal(subtotal2, `El subtotal 1 (${subtotal1}) no coincide con el subtotal 2 (${subtotal2})`);
 });
 
-Then('El usuario modifica la cantidad de uno de los productos', async function () {
-    console.log("El usuario modifica la cantidad de uno de los productos");
-    
+When('El usuario elimina uno de los productos del carrito', async function () {
+    console.log("El usuario elimina uno de los productos del carrito");
+    await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/checkout/cart/"), configuration.browser.extendedTimeout);
+    const removeItemButton = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutCarPage.removeItemButton),configuration.browser.extendedTimeout);
+    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", removeItemButton);
+    await DriverFactory.myDriver.wait(until.elementIsVisible(removeItemButton), configuration.browser.extendedTimeout);
+    await DriverFactory.myDriver.wait(until.elementIsEnabled(removeItemButton), configuration.browser.extendedTimeout);
+    await removeItemButton.click();
+    await removeItemButton.click();
+    await DriverFactory.myDriver.wait(until.stalenessOf(removeItemButton), configuration.browser.extendedTimeout);
+    console.log("El producto fue eliminado del carrito.");
 });
 
-Then('El precio total del carrito debe actualizarse correctamente', async function () {
-    console.log("El precio total del carrito debe actualizarse correctamente");
-    
+Then('El producto debe desaparecer del listado, se muestra un mensaje de confirmacion', async function () {
+    console.log("El producto debe desaparecer del listado, se muestra un mensaje de confirmacion");
+    const emptyCartMessage = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutCarPage.emptyCartMessage),configuration.browser.timeout);
+    await DriverFactory.myDriver.wait(until.elementIsVisible(emptyCartMessage), configuration.browser.timeout);
+    await DriverFactory.myDriver.wait(until.elementIsEnabled(emptyCartMessage), configuration.browser.timeout);
+    const messageText = await emptyCartMessage.getText();
+    const expectedMessage = "You have no items in your shopping cart.";
+    expect(messageText.trim()).to.equal(expectedMessage, `El mensaje obtenido fue: "${messageText}", pero se esperaba: "${expectedMessage}".`);
 });
