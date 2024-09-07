@@ -15,6 +15,8 @@ class YogaPage {
     cruiseDualAnalogWatchLink = By.css('a[href="https://magento2-demo.magebit.com/cruise-dual-analog-watch.html"]');
 
     alternateMyCartLink = By.xpath('/html/body/div[2]/header/div[2]/div[1]/a');
+    messageConfirm = By.css('div[data-bind="html: $parent.prepareMessageForHtml(message.text)"]');
+    viewAndEditCartButton = By.css('span[data-bind="i18n: \'View and Edit Cart\'"]');
 }
 
 module.exports = new YogaPage();

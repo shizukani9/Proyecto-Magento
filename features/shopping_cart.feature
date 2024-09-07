@@ -1,20 +1,20 @@
 @ui
 Feature: Carrito de Compras 
 
-@funcional_Positivo @GC-1
+ @funcional_Positivo @GC-1 
 Scenario: GC-1 Verificar que cuando se añade un producto al carrito entonces se actualiza la cantidad y el precio total
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
-        And El usuario añade un producto al carrito
+    When El usuario añade un producto al carrito
     Then La cantidad de productos en el carrito debe actualizarse
-        And El precio total del carrito debe reflejar el producto añadido
 
-@funcional_Positivo @GC-2
+@createAccount @funcional_Positivo @GC-2 @shop
 Scenario: GC-2 Verificar que cuando se edita la cantidad de un producto en el carrito entonces el precio total se actualiza correctamente
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
-        And El usuario añade un producto al carrito  
-    When El usuario modifica la cantidad de uno de los productos
+    When El usuario añade un producto al carrito
+    Then La cantidad de productos en el carrito debe actualizarse 
+    Then El usuario modifica la cantidad de uno de los productos
     Then El precio total del carrito debe actualizarse correctamente
 
 @funcional_Positivo @GC-3

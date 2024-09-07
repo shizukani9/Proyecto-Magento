@@ -1,17 +1,17 @@
 {
     "demo":{
-        "urlUI":"https://magento2-demo.magebit.com/",
-        "apiToken": "",
+        "url":"https://magento2-demo.magebit.com/",
+        "apiToken": "psz0zk8oqeetwpgt5i0x91a1jprqfgch",
         "userAdmin":{
-            "username": "<username>",
-            "password": ""
+            "username": "magebit",
+            "password": "Demo123"
         },
         "user":{
-            "firstName": "<firstName>",
-            "lastName": "<lastName>",
-            "email": "<email>",
-            "password": "",
-            "confirmPassword": ""
+            "firstName": "Erika",
+            "lastName": "Mamani",
+            "email": "erika@gmail.com",
+            "password": "Erika12!",
+            "confirmPassword": "Erika12!"
         }
     }
 }
