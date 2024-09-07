@@ -28,11 +28,8 @@ Given('El usuario navega a página de Yoga Collection', async function () {
 
 When('El usuario añade un producto al carrito', async function () {
     console.log("El usuario añade un producto al carrito");
-
-    const listViewModeLinkButton = await DriverFactory.myDriver.wait(until.elementLocated(YogaPage.listViewModeLink), configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(listViewModeLinkButton), configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(listViewModeLinkButton), configuration.browser.timeout);
-    await listViewModeLinkButton.click(); 
+    await DriverFactory.myDriver.get("https://magento2-demo.magebit.com/collections/yoga-new.html?product_list_mode=list");
+    await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/collections/yoga-new.html?product_list_mode=list"), configuration.browser.timeout);
 
     const firstAddToCartButton = await DriverFactory.myDriver.wait(until.elementLocated(YogaPage.firstAddToCartButton), configuration.browser.timeout);
     await DriverFactory.myDriver.wait(until.elementIsVisible(firstAddToCartButton), configuration.browser.timeout); 
@@ -53,9 +50,10 @@ Then('La cantidad de productos en el carrito debe actualizarse en la pagina Chec
 
 Then('El usuario modifica la cantidad de uno de los productos', async function () {
     console.log("El usuario modifica la cantidad de uno de los productos");
-    await DriverFactory.myDriver.executeScript("window.scrollBy(0, 200);");
+    
  
     const cartQuantityInput = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutCarPage.cartQuantityInput),configuration.browser.extendedTimeout);
+    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", cartQuantityInput);
     await DriverFactory.myDriver.wait(until.elementIsVisible(cartQuantityInput), configuration.browser.extendedTimeout);
     await DriverFactory.myDriver.wait(until.elementIsEnabled(cartQuantityInput), configuration.browser.extendedTimeout);
 
@@ -75,8 +73,9 @@ Then('El usuario modifica la cantidad de uno de los productos', async function (
 Then('El precio total del carrito debe actualizarse correctamente', async function () {
     console.log("El precio total del carrito debe actualizarse correctamente");
     await DriverFactory.myDriver.sleep(7000); 
-
+    
     const subtotalPriceElement1 = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutCarPage.subtotalPriceElement1),configuration.browser.extendedTimeout);
+    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", subtotalPriceElement1);
     await DriverFactory.myDriver.wait(until.elementIsVisible(subtotalPriceElement1), configuration.browser.extendedTimeout);
     await DriverFactory.myDriver.wait(until.elementIsEnabled(subtotalPriceElement1), configuration.browser.extendedTimeout);
     const subtotalText1 = await subtotalPriceElement1.getText();
@@ -94,11 +93,11 @@ Then('El precio total del carrito debe actualizarse correctamente', async functi
 When('El usuario elimina uno de los productos del carrito', async function () {
     console.log("El usuario elimina uno de los productos del carrito");
     await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/checkout/cart/"), configuration.browser.extendedTimeout);
+    
     const removeItemButton = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutCarPage.removeItemButton),configuration.browser.extendedTimeout);
     await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", removeItemButton);
     await DriverFactory.myDriver.wait(until.elementIsVisible(removeItemButton), configuration.browser.extendedTimeout);
     await DriverFactory.myDriver.wait(until.elementIsEnabled(removeItemButton), configuration.browser.extendedTimeout);
-    await removeItemButton.click();
     await removeItemButton.click();
     await DriverFactory.myDriver.wait(until.stalenessOf(removeItemButton), configuration.browser.extendedTimeout);
     console.log("El producto fue eliminado del carrito.");
