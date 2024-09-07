@@ -12,6 +12,18 @@
             "email": "erika@gmail.com",
             "password": "Erika12!",
             "confirmPassword": "Erika12!"
+        },
+        "website":{
+            "couponCode": "cupon123"
+        },
+        "userShippingAddress":{
+            "firstName": "Erika",
+            "lastName": "Mamani",
+            "company": "Compania America",
+            "streetAddress": "Avenida Libertador entre Jordan",
+            "city": "Norte Combom",
+            "zipPostal": "12345",
+            "phoneNumber": "123456789"
         }
     }
 }

@@ -1,5 +1,5 @@
 @ui
-Feature: Carrito de Compras 
+Feature: Gestión de Carrito de compras 
 
 @createAccount @deleteAccount @funcional_Positivo @GC-1 @I1 @pass
 Scenario: GC-1 Verificar que cuando se añade un producto al carrito entonces se actualiza la cantidad y el precio total
@@ -27,19 +27,20 @@ Scenario: GC-3 Verificar que cuando se elimina un producto del carrito entonces 
     When El usuario elimina uno de los productos del carrito
     Then El producto debe desaparecer del listado, se muestra un mensaje de confirmacion
 
-@createAccount @funcional_Positivo @GC-4 @I1 @pass @shop
-Scenario: GC-4: Verificar que cuando se aplica un código de descuento en el carrito entonces el precio total se actualiza correctamente
+@createAccount @deleteAccount @funcional_Positivo @GC-4 @I1 @pass @shop
+Scenario: GC-4: Verificar que cuando se aplica un c
+ódigo de descuento en el carrito entonces el precio total se actualiza correctamente
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
     When El usuario añade un producto al carrito
     Then La cantidad de productos en el carrito debe actualizarse en la pagina Checkout cart
-        And El usuario confirma el producto para la compra
-    Then El usuario ingresa una dirección de envío válida
-        And El usuario guarda la dirección
     Then El usuario ingresa el código de descuento en el campo Código de descuento
         And El usuario hace clic en Aplicar
     Then El precio total del carrito se actualiza con el descuento aplicado
-        And El usuario completa la compra
+    Then El usuario procede a confirmar el producto para la compra
+    Then El usuario ingresa una dirección de envío válida
+        And El usuario guarda la dirección
+    Then El usuario completa la compra
         And El usuario ve un mensaje de confirmación de compra
 
 @funcional_Positivo @GC-5

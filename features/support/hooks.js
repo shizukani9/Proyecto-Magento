@@ -44,12 +44,23 @@ Before({ tags: "@createAccount" }, async function() {
     await DriverFactory.myDriver.get("https://magento2-demo.magebit.com/customer/account/create/");
     await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/customer/account/create/"), configuration.browser.timeout);
 
-    const firstNameInput = await DriverFactory.myDriver.wait(until.elementLocated(CreateAnAccountPage.firstNameInput));
-    const lastNameInput = await DriverFactory.myDriver.wait(until.elementLocated(CreateAnAccountPage.lastNameInput));
-    const emailInput = await DriverFactory.myDriver.wait(until.elementLocated(CreateAnAccountPage.emailInput));
-    const passwordInput = await DriverFactory.myDriver.wait(until.elementLocated(CreateAnAccountPage.passwordInput));
-    const confirmPasswordInput = await DriverFactory.myDriver.wait(until.elementLocated(CreateAnAccountPage.confirmPasswordInput));
-    const createAccountButton = await DriverFactory.myDriver.wait(until.elementLocated(CreateAnAccountPage.createAccountButton));
+    const firstNameInput = await DriverFactory.myDriver.wait(until.elementLocated(CreateAnAccountPage.firstNameInput), configuration.browser.timeout);
+    await DriverFactory.myDriver.wait(until.elementIsVisible(firstNameInput), configuration.browser.timeout);
+
+    const lastNameInput = await DriverFactory.myDriver.wait(until.elementLocated(CreateAnAccountPage.lastNameInput), configuration.browser.timeout);
+    await DriverFactory.myDriver.wait(until.elementIsVisible(lastNameInput), configuration.browser.timeout);
+
+    const emailInput = await DriverFactory.myDriver.wait(until.elementLocated(CreateAnAccountPage.emailInput), configuration.browser.timeout);
+    await DriverFactory.myDriver.wait(until.elementIsVisible(emailInput), configuration.browser.timeout);
+
+    const passwordInput = await DriverFactory.myDriver.wait(until.elementLocated(CreateAnAccountPage.passwordInput), configuration.browser.timeout);
+    await DriverFactory.myDriver.wait(until.elementIsVisible(passwordInput), configuration.browser.timeout);
+
+    const confirmPasswordInput = await DriverFactory.myDriver.wait(until.elementLocated(CreateAnAccountPage.confirmPasswordInput), configuration.browser.timeout);
+    await DriverFactory.myDriver.wait(until.elementIsVisible(confirmPasswordInput), configuration.browser.timeout);
+
+    const createAccountButton = await DriverFactory.myDriver.wait(until.elementLocated(CreateAnAccountPage.createAccountButton), configuration.browser.timeout);
+    await DriverFactory.myDriver.wait(until.elementIsVisible(createAccountButton), configuration.browser.timeout);
 
     await firstNameInput.sendKeys(environment.demo.user.firstName);
     await lastNameInput.sendKeys(environment.demo.user.lastName);
