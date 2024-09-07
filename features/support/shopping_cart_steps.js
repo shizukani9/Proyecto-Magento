@@ -86,3 +86,13 @@ Then('El precio total del carrito debe actualizarse correctamente', async functi
     const subtotal2 = parseFloat(subtotalText2.replace('$', '').trim());
     expect(subtotal1).to.equal(subtotal2, `El subtotal 1 (${subtotal1}) no coincide con el subtotal 2 (${subtotal2})`);
 });
+
+Then('El usuario modifica la cantidad de uno de los productos', async function () {
+    console.log("El usuario modifica la cantidad de uno de los productos");
+    
+});
+
+Then('El precio total del carrito debe actualizarse correctamente', async function () {
+    console.log("El precio total del carrito debe actualizarse correctamente");
+    
+});

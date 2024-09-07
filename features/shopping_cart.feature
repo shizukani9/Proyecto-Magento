@@ -18,11 +18,12 @@ Scenario: GC-2 Verificar que cuando se edita la cantidad de un producto en el ca
     Then El usuario modifica la cantidad de uno de los productos
     Then El precio total del carrito debe actualizarse correctamente
 
-@createAccount @deleteAccount @funcional_Positivo @GC-3 @I1 @pass
+@createAccount @funcional_Positivo @GC-3 @I1 @pass @shop
 Scenario: GC-3 Verificar que cuando se elimina un producto del carrito entonces el producto desaparece del listado y el precio total se actualiza
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
-        And El usuario añade un producto al carrito  
+    When El usuario añade un producto al carrito
+    Then La cantidad de productos en el carrito debe actualizarse  
     When El usuario elimina uno de los productos del carrito
     Then El producto debe desaparecer del listado
 
