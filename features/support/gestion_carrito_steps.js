@@ -2,7 +2,6 @@ const { Given, When, Then } = require("@cucumber/cucumber");
 const DriverFactory = require("../../core/ui/driverFactory");
 let chai = require('chai');
 let expect = chai.expect;
-const axios = require('axios');
 const YogaPage = require('../../main/ui/yoga_page');
 const HomePage = require('../../main/ui/home_page');
 const CheckoutCarPage = require('../../main/ui/checkout_car_page');
