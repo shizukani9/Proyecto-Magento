@@ -1,4 +1,4 @@
-const { By, Select } = require("selenium-webdriver");
+const { until, By, Select } = require("selenium-webdriver");
 const DriverFactory = require("../../core/ui/driverFactory");
 const configuration = require("../../configuration.json");
 
@@ -81,6 +81,14 @@ class ShippingAdressPage {
         await driver.wait(until.elementIsEnabled(element), configuration.browser.timeout);
         const select = new Select(element);
         await select.selectByValue(value);
+    }
+
+    async saveAddress() {
+        const nextButton = await DriverFactory.myDriver.wait(until.elementLocated(this.nextButton), configuration.browser.timeout);
+        await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", nextButton);
+        await DriverFactory.myDriver.wait(until.elementIsVisible(nextButton), configuration.browser.timeout);
+        await DriverFactory.myDriver.wait(until.elementIsEnabled(nextButton), configuration.browser.timeout);
+        await nextButton.click();
     }
 }
 

@@ -1,4 +1,6 @@
-const { By } = require("selenium-webdriver");
+const { until, By, Select } = require("selenium-webdriver");
+const DriverFactory = require("../../core/ui/driverFactory");
+const configuration = require("../../configuration.json");
 
 class CheckoutCarPage {
     priceElement = By.xpath('/html/body/div[2]/main/div[3]/div/div[2]/div[1]/div[2]/div/table/tbody/tr[3]/td/strong/span');
@@ -12,6 +14,59 @@ class CheckoutCarPage {
     couponCodeInput = By.css('input.input-text#coupon_code[name="coupon_code"]');
     applyDiscountButton = By.css('button.action.apply.primary[type="button"][value="Apply Discount"]');
     proceedToCheckoutButton = By.css('button.action.primary.checkout[type="button"][data-role="proceed-to-checkout"]');
+
+    async waitForCartPageLoad() {
+        await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/checkout/cart/"), configuration.browser.extendedTimeout);
+    }
+
+    async getSubtotalText1() {
+        const subtotalPriceElement1 = await DriverFactory.myDriver.wait(until.elementLocated(this.subtotalPriceElement1), configuration.browser.extendedTimeout);
+        await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", subtotalPriceElement1);
+        await DriverFactory.myDriver.wait(until.elementIsVisible(subtotalPriceElement1), configuration.browser.extendedTimeout);
+        await DriverFactory.myDriver.wait(until.elementIsEnabled(subtotalPriceElement1), configuration.browser.extendedTimeout);
+        return subtotalPriceElement1.getText();
+    }
+
+    async getSubtotalText2() {
+        const subtotalPriceElement2 = await DriverFactory.myDriver.wait(until.elementLocated(this.subtotalPriceElement2), configuration.browser.extendedTimeout);
+        await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", subtotalPriceElement2);
+        await DriverFactory.myDriver.wait(until.elementIsVisible(subtotalPriceElement2), configuration.browser.extendedTimeout);
+        await DriverFactory.myDriver.wait(until.elementIsEnabled(subtotalPriceElement2), configuration.browser.extendedTimeout);
+        return subtotalPriceElement2.getText();
+    }
+
+    async scrollToAndEnterQuantity(randomQuantity) {
+        const cartQuantityInput = await DriverFactory.myDriver.wait(until.elementLocated(this.cartQuantityInput), configuration.browser.extendedTimeout);
+        await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", cartQuantityInput);
+        await DriverFactory.myDriver.wait(until.elementIsVisible(cartQuantityInput), configuration.browser.extendedTimeout);
+        await DriverFactory.myDriver.wait(until.elementIsEnabled(cartQuantityInput), configuration.browser.extendedTimeout);
+        await cartQuantityInput.clear(); 
+        await cartQuantityInput.sendKeys(randomQuantity.toString());
+    }
+
+    async clickUpdateCartButton() {
+        const updateCartButton = await DriverFactory.myDriver.wait(until.elementLocated(this.updateCartButton), configuration.browser.extendedTimeout);
+        await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", updateCartButton);
+        await DriverFactory.myDriver.wait(until.elementIsVisible(updateCartButton), configuration.browser.extendedTimeout);
+        await DriverFactory.myDriver.wait(until.elementIsEnabled(updateCartButton), configuration.browser.extendedTimeout);
+        await updateCartButton.click();
+        await DriverFactory.myDriver.wait(until.stalenessOf(updateCartButton), configuration.browser.extendedTimeout);
+    }
+
+    async scrollToRemoveItemButton() {
+        const removeItemButton = await DriverFactory.myDriver.wait(until.elementLocated(this.removeItemButton), configuration.browser.extendedTimeout);
+        await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", removeItemButton);
+        await DriverFactory.myDriver.wait(until.elementIsVisible(removeItemButton), configuration.browser.extendedTimeout);
+        await DriverFactory.myDriver.wait(until.elementIsEnabled(removeItemButton), configuration.browser.extendedTimeout);
+        return removeItemButton;
+    }
+
+    async clickRemoveItemButton() {
+        const removeItemButton = await this.scrollToRemoveItemButton();
+        await removeItemButton.click();
+        await DriverFactory.myDriver.wait(until.stalenessOf(removeItemButton), configuration.browser.extendedTimeout);
+    }
+
 }
 
 module.exports = new CheckoutCarPage();

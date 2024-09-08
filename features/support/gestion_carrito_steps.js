@@ -42,49 +42,26 @@ When('El usuario añade un producto al carrito', async function () {
 Then('La cantidad de productos en el carrito debe actualizarse en la pagina Checkout cart', async function () {
     console.log("La cantidad de productos en el carrito debe actualizarse en la pagina Checkout cart");
     await DriverFactory.myDriver.get("https://magento2-demo.magebit.com/checkout/cart/");
-    await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/checkout/cart/"), configuration.browser.timeout);
-
-    const expectedUrl = "https://magento2-demo.magebit.com/checkout/cart/";
-    await DriverFactory.myDriver.get(expectedUrl);
-    const currentUrl = await DriverFactory.myDriver.getCurrentUrl();
-    expect(currentUrl).to.equal(expectedUrl, currentUrl);
+    await CheckoutCarPage.waitForCartPageLoad(); 
 });
 
 Then('El usuario modifica la cantidad de uno de los productos', async function () {
     console.log("El usuario modifica la cantidad de uno de los productos");
-    
-    const cartQuantityInput = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutCarPage.cartQuantityInput),configuration.browser.extendedTimeout);
-    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", cartQuantityInput);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(cartQuantityInput), configuration.browser.extendedTimeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(cartQuantityInput), configuration.browser.extendedTimeout);
-
+    await CheckoutCarPage.waitForCartPageLoad(); 
     const randomQuantity = DataGenerator.generateRandomNumber(1);
-    await cartQuantityInput.sendKeys(randomQuantity.toString());
-    await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/checkout/cart/"), configuration.browser.extendedTimeout);
-    
-    const updateCartButton = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutCarPage.updateCartButton),configuration.browser.extendedTimeout);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(updateCartButton), configuration.browser.extendedTimeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(updateCartButton), configuration.browser.extendedTimeout);
-    await updateCartButton.click();
-
-    await DriverFactory.myDriver.wait(until.stalenessOf(updateCartButton), configuration.browser.extendedTimeout); 
-    await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/checkout/cart/"), configuration.browser.extendedTimeout);
+    await CheckoutCarPage.scrollToAndEnterQuantity(randomQuantity);
+    await CheckoutCarPage.waitForCartPageLoad(); 
+    await CheckoutCarPage.clickUpdateCartButton(); 
+    await CheckoutCarPage.waitForCartPageLoad(); 
 });
 
 Then('El precio total del carrito debe actualizarse correctamente', async function () {
     console.log("El precio total del carrito debe actualizarse correctamente");
-    await DriverFactory.myDriver.sleep(7000); 
-    
-    const subtotalPriceElement1 = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutCarPage.subtotalPriceElement1),configuration.browser.extendedTimeout);
-    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", subtotalPriceElement1);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(subtotalPriceElement1), configuration.browser.extendedTimeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(subtotalPriceElement1), configuration.browser.extendedTimeout);
-    const subtotalText1 = await subtotalPriceElement1.getText();
+    //await DriverFactory.myDriver.sleep(7000);
+    await CheckoutCarPage.waitForCartPageLoad();
 
-    const subtotalPriceElement2 = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutCarPage.subtotalPriceElement2),configuration.browser.extendedTimeout);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(subtotalPriceElement2), configuration.browser.extendedTimeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(subtotalPriceElement2), configuration.browser.extendedTimeout);
-    const subtotalText2 = await subtotalPriceElement2.getText();
+    const subtotalText1 = await CheckoutCarPage.getSubtotalText1();
+    const subtotalText2 = await CheckoutCarPage.getSubtotalText2();
 
     const subtotal1 = parseFloat(subtotalText1.replace('$', '').trim());
     const subtotal2 = parseFloat(subtotalText2.replace('$', '').trim());
@@ -93,15 +70,9 @@ Then('El precio total del carrito debe actualizarse correctamente', async functi
 
 When('El usuario elimina uno de los productos del carrito', async function () {
     console.log("El usuario elimina uno de los productos del carrito");
-    await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/checkout/cart/"), configuration.browser.extendedTimeout);
-    
-    const removeItemButton = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutCarPage.removeItemButton),configuration.browser.extendedTimeout);
-    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", removeItemButton);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(removeItemButton), configuration.browser.extendedTimeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(removeItemButton), configuration.browser.extendedTimeout);
-    await removeItemButton.click();
-    await DriverFactory.myDriver.wait(until.stalenessOf(removeItemButton), configuration.browser.extendedTimeout);
-    console.log("El producto fue eliminado del carrito.");
+    await CheckoutCarPage.waitForCartPageLoad();
+    await CheckoutCarPage.clickRemoveItemButton();
+    await CheckoutCarPage.waitForCartPageLoad();
 });
 
 Then('El producto debe desaparecer del listado, se muestra un mensaje de confirmacion', async function () {
@@ -170,81 +141,34 @@ Then('El usuario procede a confirmar el producto para la compra', async function
     await proceedToCheckoutButton.click();
 });
 
-Then('El usuario ingresa una dirección de envío válida', async function () {
+Then('El usuario ingresa una dirección de envío válida', async function () { //FUNCIONA LA REFACTORIZACION
     console.log("El usuario ingresa una dirección de envío válida");
-    await DriverFactory.myDriver.sleep(3000);
-    //await DriverFactory.myDriver.wait(until.urlContains('https://magento2-demo.magebit.com/checkout/onepage/success/'), configuration.browser.timeout);
-    const firstNameInput = await DriverFactory.myDriver.wait(until.elementLocated(ShippingAdressPage.firstNameInput),configuration.browser.timeout);
-    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", firstNameInput);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(firstNameInput), configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(firstNameInput), configuration.browser.timeout);
-    await firstNameInput.clear();
-    await firstNameInput.sendKeys(environment.demo.userShippingAddress.firstName);
+    //await DriverFactory.myDriver.sleep(2000);
+    await DriverFactory.myDriver.wait(until.urlContains('https://magento2-demo.magebit.com/checkout/#shipping'), configuration.browser.timeout);
 
-    const lastNameInput= await DriverFactory.myDriver.wait(until.elementLocated(ShippingAdressPage.lastNameInput),configuration.browser.timeout);
-    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", lastNameInput);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(lastNameInput), configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(lastNameInput), configuration.browser.timeout);
-    await lastNameInput.clear();
-    await lastNameInput.sendKeys(environment.demo.userShippingAddress.lastName);
+    const firstName = environment.demo.userShippingAddress.firstName;
+    const lastName = environment.demo.userShippingAddress.lastName;
+    const company = environment.demo.userShippingAddress.company;
+    const streetAddress = environment.demo.userShippingAddress.streetAddress;
+    const stateValue = "2";
+    const city = environment.demo.userShippingAddress.city;
+    const postcode = environment.demo.userShippingAddress.zipPostal;
+    const phoneNumber = environment.demo.userShippingAddress.phoneNumber;
 
-    const companyInput= await DriverFactory.myDriver.wait(until.elementLocated(ShippingAdressPage.companyInput),configuration.browser.timeout);
-    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", companyInput);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(companyInput), configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(companyInput), configuration.browser.timeout);
-    await companyInput.clear();
-    await companyInput.sendKeys(environment.demo.userShippingAddress.company);
-
-    const streetAddressInput = await DriverFactory.myDriver.wait(until.elementLocated(ShippingAdressPage.streetAddressInput),configuration.browser.timeout);
-    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", streetAddressInput);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(streetAddressInput), configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(streetAddressInput), configuration.browser.timeout);
-    await streetAddressInput.clear();
-    await streetAddressInput.sendKeys(environment.demo.userShippingAddress.streetAddress);
-    
-    const stateSelect = await DriverFactory.myDriver.wait(until.elementLocated(ShippingAdressPage.stateSelect),configuration.browser.timeout);
-    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", stateSelect);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(stateSelect), configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(stateSelect), configuration.browser.timeout);
-    //await stateSelect.click();
-    const select = new Select(stateSelect);
-    await select.selectByValue("2"); 
-
-    const cityInput = await DriverFactory.myDriver.wait(until.elementLocated(ShippingAdressPage.cityInput),configuration.browser.timeout);
-    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", cityInput);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(cityInput), configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(cityInput), configuration.browser.timeout);
-    await cityInput.clear();
-    await cityInput.sendKeys(environment.demo.userShippingAddress.city);
-
-    const postcodeInput = await DriverFactory.myDriver.wait(until.elementLocated(ShippingAdressPage.postcodeInput),configuration.browser.timeout);
-    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", postcodeInput);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(postcodeInput), configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(postcodeInput), configuration.browser.timeout);
-    await postcodeInput.clear();
-    await postcodeInput.sendKeys(environment.demo.userShippingAddress.zipPostal);
-
-    const telephoneInput = await DriverFactory.myDriver.wait(until.elementLocated(ShippingAdressPage.telephoneInput),configuration.browser.timeout);
-    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", telephoneInput);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(telephoneInput), configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(telephoneInput), configuration.browser.timeout);
-    await telephoneInput.clear();
-    await telephoneInput.sendKeys(environment.demo.userShippingAddress.phoneNumber);
-
-    const shippingMethodRadio = await DriverFactory.myDriver.wait(until.elementLocated(ShippingAdressPage.shippingMethodRadio),configuration.browser.timeout);
-    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", shippingMethodRadio);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(shippingMethodRadio), configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(shippingMethodRadio), configuration.browser.timeout);
-    await shippingMethodRadio.click();
+    await ShippingAdressPage.enterFirstName(firstName);
+    await ShippingAdressPage.enterLastName(lastName);
+    await ShippingAdressPage.enterCompany(company);
+    await ShippingAdressPage.enterStreetAddress(streetAddress);
+    await ShippingAdressPage.selectState(stateValue);
+    await ShippingAdressPage.enterCity(city);
+    await ShippingAdressPage.enterPostcode(postcode);
+    await ShippingAdressPage.enterTelephone(phoneNumber);
+    await ShippingAdressPage.selectShippingMethod();
 });
 
 Then('El usuario guarda la dirección', async function () {
     console.log("El usuario guarda la dirección");
-    const nextButton = await DriverFactory.myDriver.wait(until.elementLocated(ShippingAdressPage.nextButton),configuration.browser.timeout);
-    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", nextButton);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(nextButton), configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(nextButton), configuration.browser.timeout);
-    await nextButton.click();
+    await ShippingAdressPage.saveAddress();
 });
 
 Then('El usuario completa la compra', async function () {
