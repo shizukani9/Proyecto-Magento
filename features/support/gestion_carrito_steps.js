@@ -274,3 +274,13 @@ Then('El usuario ve un mensaje de confirmación de compra', async function () {
     const expectedMessage = "Thank you for your purchase!";
     expect(messageText.trim()).to.equal(expectedMessage, `El mensaje obtenido fue: "${messageText}", pero se esperaba: "${expectedMessage}".`);
 });
+
+Then('El usuario ingresa el código no válido de descuento en el campo Código de descuento', async function () {
+    console.log("El usuario ingresa el código no válido de descuento en el campo Código de descuento");
+    
+});
+
+Then('El usuario ve un mensaje de error de código de descuento', async function () {
+    console.log("El usuario ve un mensaje de error de código de descuento");
+    
+});
