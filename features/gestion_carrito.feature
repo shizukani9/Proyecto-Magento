@@ -1,7 +1,7 @@
 @ui
 Feature: Gestión de Carrito de compras 
 
-@createAccount @deleteAccount @funcional_Positivo @GC-1 @Iteracion1 @pass
+@createAccount @deleteAccount @funcional_Positivo @GC-1 @Iteracion1 @pass 
 Scenario: GC-1: Verificar que cuando se añade un producto al carrito entonces se actualiza la cantidad y el precio total
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -9,7 +9,7 @@ Scenario: GC-1: Verificar que cuando se añade un producto al carrito entonces s
     Then La cantidad de productos en el carrito debe actualizarse en la pagina Checkout cart
     Then El precio total del carrito debe actualizarse correctamente
 
-@createAccount @deleteAccount @funcional_Positivo @GC-2 @Iteracion1 @pass
+@createAccount @deleteAccount @funcional_Positivo @GC-2 @Iteracion1 @pass @shop
 Scenario: GC-2: Verificar que cuando se edita la cantidad de un producto en el carrito entonces el precio total se actualiza correctamente
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -27,7 +27,7 @@ Scenario: GC-3: Verificar que cuando se elimina un producto del carrito entonces
     When El usuario elimina uno de los productos del carrito
     Then El producto debe desaparecer del listado, se muestra un mensaje de confirmacion
 
-@createAccount @deleteAccount @funcional_Positivo @GC-4 @Iteracion1 @pass @shop
+@createAccount @deleteAccount @funcional_Positivo @GC-4 @Iteracion1 @pass 
 Scenario: GC-4: Verificar que cuando se aplica un código de descuento válido en el carrito entonces el precio total se actualiza correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection

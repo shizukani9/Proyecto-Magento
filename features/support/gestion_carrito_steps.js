@@ -41,8 +41,9 @@ When('El usuario añade un producto al carrito', async function () {
 
 Then('La cantidad de productos en el carrito debe actualizarse en la pagina Checkout cart', async function () {
     console.log("La cantidad de productos en el carrito debe actualizarse en la pagina Checkout cart");
+    await DriverFactory.myDriver.sleep(2000); 
     await DriverFactory.myDriver.get("https://magento2-demo.magebit.com/checkout/cart/");
-    await CheckoutCarPage.waitForCartPageLoad(); 
+    await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/checkout/cart/"), configuration.browser.extendedTimeout);
 });
 
 Then('El usuario modifica la cantidad de uno de los productos', async function () {
@@ -57,7 +58,7 @@ Then('El usuario modifica la cantidad de uno de los productos', async function (
 
 Then('El precio total del carrito debe actualizarse correctamente', async function () {
     console.log("El precio total del carrito debe actualizarse correctamente");
-    //await DriverFactory.myDriver.sleep(7000);
+    await DriverFactory.myDriver.sleep(2000);
     await CheckoutCarPage.waitForCartPageLoad();
 
     const subtotalText1 = await CheckoutCarPage.getSubtotalText1();
@@ -95,7 +96,7 @@ Then('El usuario hace clic en Aplicar', async function () {
 
 Then('El precio total del carrito se actualiza con el descuento aplicado', async function () {
     console.log("El precio total del carrito se actualiza con el descuento aplicado");
-    //await DriverFactory.myDriver.sleep(2000); 
+    await DriverFactory.myDriver.sleep(2000); 
     await CheckoutCarPage.waitForCartPageLoad();
     
     const subtotalText1 = await CheckoutCarPage.getSubtotalText1();
@@ -108,14 +109,14 @@ Then('El precio total del carrito se actualiza con el descuento aplicado', async
 
 Then('El usuario procede a confirmar el producto para la compra', async function () {
     console.log("El usuario procede a confirmar el producto para la compra");
-    //await DriverFactory.myDriver.sleep(2000); 
+    await DriverFactory.myDriver.sleep(2000); 
     await CheckoutCarPage.waitForCartPageLoad();
     await CheckoutCarPage.clickProceedToCheckoutButton();
 });
 
 Then('El usuario ingresa una dirección de envío válida', async function () { //FUNCIONA LA REFACTORIZACION
     console.log("El usuario ingresa una dirección de envío válida");
-    //await DriverFactory.myDriver.sleep(2000);
+    await DriverFactory.myDriver.sleep(2000);
     await DriverFactory.myDriver.wait(until.urlContains('https://magento2-demo.magebit.com/checkout/#shipping'), configuration.browser.timeout);
 
     const firstName = environment.demo.userShippingAddress.firstName;
