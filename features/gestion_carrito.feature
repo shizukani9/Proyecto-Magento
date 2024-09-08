@@ -27,7 +27,7 @@ Scenario: GC-3: Verificar que cuando se elimina un producto del carrito entonces
     When El usuario elimina uno de los productos del carrito
     Then El producto debe desaparecer del listado, se muestra un mensaje de confirmacion
 
-@createAccount @deleteAccount @funcional_Positivo @GC-4 @Iteracion1 @pass
+@createAccount @deleteAccount @funcional_Positivo @GC-4 @Iteracion1 @pass @shop
 Scenario: GC-4: Verificar que cuando se aplica un código de descuento válido en el carrito entonces el precio total se actualiza correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -42,7 +42,7 @@ Scenario: GC-4: Verificar que cuando se aplica un código de descuento válido e
     Then El usuario completa la compra
         And El usuario ve un mensaje de confirmación de compra
 
-@createAccount @deleteAccount @funcional_Positivo @GC-5 @Iteracion1 @pass @shop
+@createAccount @deleteAccount @funcional_Positivo @GC-5 @Iteracion1 @pass
 Scenario: GC-5: Verificar que cuando se ingresa una dirección de envío completa y válida entonces se almacena correctamente y se completa la compra
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
