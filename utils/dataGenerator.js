@@ -7,7 +7,7 @@ class DataGenerator {
 
     // Método para generar un número aleatorio (de 1 a más de 10,000)
     static generateRandomNumber(length) {
-        const characters = '0123456789';
+        const characters = '123456789';
         return parseInt(this.generateRandomString(characters, length), 10);
     }
 

@@ -1,7 +1,7 @@
 @ui
 Feature: Direccion de envio 
 
-@createAccount @funcional_Positivo @GC-1 @Iteracion1 
+@createAccount @funcional_Positivo @Iteracion1 
 Scenario: DE-1: Verificar que cuando se ingresa un Nombre (First Name) con 1 carácter entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -12,7 +12,7 @@ Scenario: DE-1: Verificar que cuando se ingresa un Nombre (First Name) con 1 car
         And El usuario guarda la dirección
         And La dirección debe guardarse correctamente sin errores
 
-@createAccount @funcional_Positivo @GC-1 @Iteracion1 
+@createAccount @funcional_Positivo @Iteracion1 
 Scenario: DE-2: Verificar que cuando se ingresa un Nombre (First Name) con 255 caracteres entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
