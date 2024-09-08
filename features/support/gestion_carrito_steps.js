@@ -91,6 +91,8 @@ Then('El usuario ingresa el código de descuento en el campo Código de descuent
 
 Then('El usuario hace clic en Aplicar', async function () {
     console.log("El usuario hace clic en Aplicar");
+    await DriverFactory.myDriver.sleep(2000); 
+    await CheckoutCarPage.waitForCartPageLoad();
     await CheckoutCarPage.clickApplyDiscountButton();
 });
 
@@ -116,7 +118,7 @@ Then('El usuario procede a confirmar el producto para la compra', async function
 
 Then('El usuario ingresa una dirección de envío válida', async function () { //FUNCIONA LA REFACTORIZACION
     console.log("El usuario ingresa una dirección de envío válida");
-    await DriverFactory.myDriver.sleep(2000);
+    await DriverFactory.myDriver.sleep(4000);
     await DriverFactory.myDriver.wait(until.urlContains('https://magento2-demo.magebit.com/checkout/#shipping'), configuration.browser.timeout);
 
     const firstName = environment.demo.userShippingAddress.firstName;
@@ -173,10 +175,17 @@ Then('El usuario ve un mensaje de confirmación de compra', async function () {
 
 Then('El usuario ingresa el código no válido de descuento en el campo Código de descuento', async function () {
     console.log("El usuario ingresa el código no válido de descuento en el campo Código de descuento");
-    
+    const couponCode = environment.demo.website.incorrectCouponCode;
+    await CheckoutCarPage.clickDiscountCodeTitle(); 
+    await CheckoutCarPage.enterCouponCode(couponCode);
 });
 
 Then('El usuario ve un mensaje de error de código de descuento', async function () {
     console.log("El usuario ve un mensaje de error de código de descuento");
-    
+    await DriverFactory.myDriver.sleep(2000); 
+    await CheckoutCarPage.waitForCartPageLoad();
+    const errorMessage = await CheckoutCarPage.getErrorMessage();
+    const couponCode = environment.demo.website.incorrectCouponCode;
+    const expectedMessage = `The coupon code "${couponCode}" is not valid.`;
+    expect(errorMessage.trim()).to.equal(expectedMessage, `El mensaje obtenido fue: "${errorMessage}", pero se esperaba: "${expectedMessage}".`);
 });

@@ -14,7 +14,8 @@
             "confirmPassword": "Erika12!"
         },
         "website":{
-            "couponCode": "cupon123"
+            "couponCode": "cupon123",
+            "incorrectCouponCode": "NoExiste"
         },
         "userShippingAddress":{
             "firstName": "Erika",

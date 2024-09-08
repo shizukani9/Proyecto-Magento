@@ -14,6 +14,7 @@ class CheckoutCarPage {
     couponCodeInput = By.css('input.input-text#coupon_code[name="coupon_code"]');
     applyDiscountButton = By.css('button.action.apply.primary[type="button"][value="Apply Discount"]');
     proceedToCheckoutButton = By.css('button.action.primary.checkout[type="button"][data-role="proceed-to-checkout"]');
+    errorMessage = By.css('div[data-bind="html: $parent.prepareMessageForHtml(message.text)"]');
 
     async waitForCartPageLoad() {
         await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/checkout/cart/"), configuration.browser.extendedTimeout);
@@ -112,6 +113,13 @@ class CheckoutCarPage {
         await DriverFactory.myDriver.wait(until.elementIsVisible(proceedToCheckoutButton), configuration.browser.timeout);
         await DriverFactory.myDriver.wait(until.elementIsEnabled(proceedToCheckoutButton), configuration.browser.timeout);
         await proceedToCheckoutButton.click();
+    }
+
+    async getErrorMessage() {
+        const errorMessageElement = await DriverFactory.myDriver.wait(until.elementLocated(this.errorMessage), configuration.browser.timeout);
+        await DriverFactory.myDriver.wait(until.elementIsVisible(errorMessageElement), configuration.browser.timeout);
+        await DriverFactory.myDriver.wait(until.elementIsEnabled(errorMessageElement), configuration.browser.timeout);
+        return errorMessageElement.getText();
     }
 
 }
