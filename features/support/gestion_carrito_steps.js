@@ -23,7 +23,9 @@ Given('El usuario está en la página de inicio', async function () {
 
 Given('El usuario navega a página de Yoga Collection', async function () {
     console.log("El usuario navega a página de Yoga Collection");
-    await HomePage.navigateToYogaCollection();
+    const YogaPageButton = await DriverFactory.myDriver.wait(until.elementLocated(HomePage.yogaCollectionLink), configuration.browser.timeout);
+    await DriverFactory.myDriver.wait(until.elementIsEnabled(YogaPageButton), configuration.browser.timeout);
+    await YogaPageButton.click();
 });
 
 When('El usuario añade un producto al carrito', async function () {
