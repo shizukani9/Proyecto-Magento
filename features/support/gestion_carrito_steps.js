@@ -162,6 +162,8 @@ Then('El precio total del carrito se actualiza con el descuento aplicado', async
 
 Then('El usuario procede a confirmar el producto para la compra', async function () {
     console.log("El usuario procede a confirmar el producto para la compra");
+    await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/checkout/cart/"), configuration.browser.extendedTimeout);
+    await DriverFactory.myDriver.sleep(2000); 
     const proceedToCheckoutButton = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutCarPage.proceedToCheckoutButton),configuration.browser.timeout);
     await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", proceedToCheckoutButton);
     await DriverFactory.myDriver.wait(until.elementIsVisible(proceedToCheckoutButton), configuration.browser.timeout);
