@@ -67,6 +67,53 @@ class CheckoutCarPage {
         await DriverFactory.myDriver.wait(until.stalenessOf(removeItemButton), configuration.browser.extendedTimeout);
     }
 
+    async getEmptyCartMessage() {
+        const emptyCartMessage = await DriverFactory.myDriver.wait(until.elementLocated(this.emptyCartMessage), configuration.browser.timeout);
+        await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", emptyCartMessage);
+        await DriverFactory.myDriver.wait(until.elementIsVisible(emptyCartMessage), configuration.browser.timeout);
+        await DriverFactory.myDriver.wait(until.elementIsEnabled(emptyCartMessage), configuration.browser.timeout);
+        return emptyCartMessage.getText();
+    }
+
+    async verifyEmptyCartMessage(expectedMessage) {
+        const messageText = await this.getEmptyCartMessage();
+        if (messageText.trim() !== expectedMessage) {
+            throw new Error(`El mensaje obtenido fue: "${messageText}", pero se esperaba: "${expectedMessage}".`);
+        }
+    }
+
+    async clickDiscountCodeTitle() {
+        const discountCodeTitle = await DriverFactory.myDriver.wait(until.elementLocated(this.discountCodeTitle), configuration.browser.timeout);
+        await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", discountCodeTitle);
+        await DriverFactory.myDriver.wait(until.elementIsVisible(discountCodeTitle), configuration.browser.timeout);
+        await DriverFactory.myDriver.wait(until.elementIsEnabled(discountCodeTitle), configuration.browser.timeout);
+        await discountCodeTitle.click();
+    }
+
+    async enterCouponCode(couponCode) {
+        const couponCodeInput = await DriverFactory.myDriver.wait(until.elementLocated(this.couponCodeInput), configuration.browser.timeout);
+        await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", couponCodeInput);
+        await DriverFactory.myDriver.wait(until.elementIsVisible(couponCodeInput), configuration.browser.timeout);
+        await DriverFactory.myDriver.wait(until.elementIsEnabled(couponCodeInput), configuration.browser.timeout);
+        await couponCodeInput.sendKeys(couponCode);
+    }
+
+    async clickApplyDiscountButton() {
+        const applyDiscountButton = await DriverFactory.myDriver.wait(until.elementLocated(this.applyDiscountButton), configuration.browser.timeout);
+        await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", applyDiscountButton);
+        await DriverFactory.myDriver.wait(until.elementIsVisible(applyDiscountButton), configuration.browser.timeout);
+        await DriverFactory.myDriver.wait(until.elementIsEnabled(applyDiscountButton), configuration.browser.timeout);
+        await applyDiscountButton.click();
+    }
+
+    async clickProceedToCheckoutButton() {
+        const proceedToCheckoutButton = await DriverFactory.myDriver.wait(until.elementLocated(this.proceedToCheckoutButton), configuration.browser.timeout);
+        await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", proceedToCheckoutButton);
+        await DriverFactory.myDriver.wait(until.elementIsVisible(proceedToCheckoutButton), configuration.browser.timeout);
+        await DriverFactory.myDriver.wait(until.elementIsEnabled(proceedToCheckoutButton), configuration.browser.timeout);
+        await proceedToCheckoutButton.click();
+    }
+
 }
 
 module.exports = new CheckoutCarPage();

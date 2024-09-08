@@ -77,53 +77,29 @@ When('El usuario elimina uno de los productos del carrito', async function () {
 
 Then('El producto debe desaparecer del listado, se muestra un mensaje de confirmacion', async function () {
     console.log("El producto debe desaparecer del listado, se muestra un mensaje de confirmacion");
-    const emptyCartMessage = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutCarPage.emptyCartMessage),configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(emptyCartMessage), configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(emptyCartMessage), configuration.browser.timeout);
-    const messageText = await emptyCartMessage.getText();
     const expectedMessage = "You have no items in your shopping cart.";
-    expect(messageText.trim()).to.equal(expectedMessage, `El mensaje obtenido fue: "${messageText}", pero se esperaba: "${expectedMessage}".`);
+    await CheckoutCarPage.verifyEmptyCartMessage(expectedMessage);
 });
 
 Then('El usuario ingresa el código de descuento en el campo Código de descuento', async function () {
     console.log("El usuario ingresa el código de descuento en el campo Código de descuento");
-    const discountCodeTitle = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutCarPage.discountCodeTitle),configuration.browser.timeout);
-    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", discountCodeTitle);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(discountCodeTitle), configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(discountCodeTitle), configuration.browser.timeout);
-    await discountCodeTitle.click();
-
-    const couponCodeInput = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutCarPage.couponCodeInput),configuration.browser.timeout);
-    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", couponCodeInput);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(couponCodeInput), configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(couponCodeInput), configuration.browser.timeout);
-    await couponCodeInput.sendKeys(environment.demo.website.couponCode);
+    const couponCode = environment.demo.website.couponCode;
+    await CheckoutCarPage.clickDiscountCodeTitle(); 
+    await CheckoutCarPage.enterCouponCode(couponCode);
 });
 
 Then('El usuario hace clic en Aplicar', async function () {
     console.log("El usuario hace clic en Aplicar");
-    const applyDiscountButton = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutCarPage.applyDiscountButton),configuration.browser.timeout);
-    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", applyDiscountButton);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(applyDiscountButton), configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(applyDiscountButton), configuration.browser.timeout);
-    await applyDiscountButton.click();
+    await CheckoutCarPage.clickApplyDiscountButton();
 });
 
 Then('El precio total del carrito se actualiza con el descuento aplicado', async function () {
     console.log("El precio total del carrito se actualiza con el descuento aplicado");
-    await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/checkout/cart/"), configuration.browser.extendedTimeout);
-    await DriverFactory.myDriver.sleep(4000); 
+    //await DriverFactory.myDriver.sleep(2000); 
+    await CheckoutCarPage.waitForCartPageLoad();
     
-    const subtotalPriceElement1 = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutCarPage.subtotalPriceElement1),configuration.browser.extendedTimeout);
-    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", subtotalPriceElement1);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(subtotalPriceElement1), configuration.browser.extendedTimeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(subtotalPriceElement1), configuration.browser.extendedTimeout);
-    const subtotalText1 = await subtotalPriceElement1.getText();
-
-    const subtotalPriceElement2 = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutCarPage.subtotalPriceElement2),configuration.browser.extendedTimeout);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(subtotalPriceElement2), configuration.browser.extendedTimeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(subtotalPriceElement2), configuration.browser.extendedTimeout);
-    const subtotalText2 = await subtotalPriceElement2.getText();
+    const subtotalText1 = await CheckoutCarPage.getSubtotalText1();
+    const subtotalText2 = await CheckoutCarPage.getSubtotalText2();
 
     const subtotal1 = parseFloat(subtotalText1.replace('$', '').trim());
     const subtotal2 = parseFloat(subtotalText2.replace('$', '').trim());
@@ -132,13 +108,9 @@ Then('El precio total del carrito se actualiza con el descuento aplicado', async
 
 Then('El usuario procede a confirmar el producto para la compra', async function () {
     console.log("El usuario procede a confirmar el producto para la compra");
-    await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/checkout/cart/"), configuration.browser.extendedTimeout);
-    await DriverFactory.myDriver.sleep(2000); 
-    const proceedToCheckoutButton = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutCarPage.proceedToCheckoutButton),configuration.browser.timeout);
-    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", proceedToCheckoutButton);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(proceedToCheckoutButton), configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(proceedToCheckoutButton), configuration.browser.timeout);
-    await proceedToCheckoutButton.click();
+    //await DriverFactory.myDriver.sleep(2000); 
+    await CheckoutCarPage.waitForCartPageLoad();
+    await CheckoutCarPage.clickProceedToCheckoutButton();
 });
 
 Then('El usuario ingresa una dirección de envío válida', async function () { //FUNCIONA LA REFACTORIZACION
