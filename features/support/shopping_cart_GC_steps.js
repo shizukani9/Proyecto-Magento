@@ -142,7 +142,7 @@ Then('El usuario hace clic en Aplicar', async function () {
 Then('El precio total del carrito se actualiza con el descuento aplicado', async function () {
     console.log("El precio total del carrito se actualiza con el descuento aplicado");
     await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/checkout/cart/"), configuration.browser.extendedTimeout);
-    await DriverFactory.myDriver.sleep(5000); 
+    await DriverFactory.myDriver.sleep(4000); 
     
     const subtotalPriceElement1 = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutCarPage.subtotalPriceElement1),configuration.browser.extendedTimeout);
     await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", subtotalPriceElement1);
