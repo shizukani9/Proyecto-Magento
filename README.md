@@ -28,13 +28,14 @@ Este proyecto tiene como objetivo automatizar las pruebas de regresión para un 
 
 ### Instalación
 Clona el repositorio en tu máquina local:
+
 ```bash
 git clone https://github.com/tu-repositorio.git
 
 Navega al directorio del proyecto:
 
 ```bash
-Copiar códigocd tu-repositorio
+cd tu-repositorio
 
 ### Instala las dependencias necesarias ejecutando el siguiente comando:
 
@@ -59,8 +60,10 @@ open reports/cucumber-report-Iteracion1.html
 El proyecto incluye un generador de datos aleatorios (dataGenerator.js) que permite generar información como nombres de usuario, correos electrónicos y contraseñas para las pruebas. Estos datos se utilizan para asegurar la variabilidad y evitar duplicidades en las pruebas.
 
 Ejemplo de Uso
+
 ```bash
 const DataGenerator = require('./utils/dataGenerator');
+
 ```bash
 const correoAleatorio = DataGenerator.generateLetters(10) + "@example.com";
 
@@ -69,14 +72,17 @@ Si deseas contribuir a este proyecto, sigue los siguientes pasos:
 
 Haz un fork del repositorio.
 Crea una nueva rama:
+
 ```bash
 git checkout -b feature/nueva-funcionalidad
 
 Realiza los cambios y haz un commit:
+
 ```bash
 git commit -m "Añadir nueva funcionalidad"
 
 Sube los cambios a tu repositorio:
+
 ```bash
 git push origin feature/nueva-funcionalidad
 
