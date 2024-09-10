@@ -765,3 +765,78 @@ Then('El usuario ingresa el Codigo Postal vacio', async function () {
     await ShippingAdressPage.enterTelephone(phoneNumber);
     await ShippingAdressPage.selectShippingMethod();
 });
+
+Then('El usuario ingresa el Codigo Postal con 5 caracteres', async function () {
+    console.log("El usuario ingresa el Codigo Postal con 5 caracteres");
+    await DriverFactory.myDriver.sleep(4000);
+    await DriverFactory.myDriver.wait(until.urlContains('https://magento2-demo.magebit.com/checkout/#shipping'), configuration.browser.timeout);
+
+    const firstName = environment.demo.userShippingAddress.firstName;
+    const lastName = environment.demo.userShippingAddress.lastName;
+    const company = environment.demo.userShippingAddress.company;
+    const streetAddress = environment.demo.userShippingAddress.streetAddress;
+    const stateValue = "5";
+    const city = environment.demo.userShippingAddress.city;
+    const postcode = DataGenerator.generateRandomNumber(5);
+    const phoneNumber = environment.demo.userShippingAddress.phoneNumber;
+
+    await ShippingAdressPage.enterFirstName(firstName);
+    await ShippingAdressPage.enterLastName(lastName);
+    await ShippingAdressPage.enterCompany(company);
+    await ShippingAdressPage.enterStreetAddress(streetAddress);
+    await ShippingAdressPage.selectState(stateValue);
+    await ShippingAdressPage.enterCity(city);
+    await ShippingAdressPage.enterPostcode(postcode);
+    await ShippingAdressPage.enterTelephone(phoneNumber);
+    await ShippingAdressPage.selectShippingMethod();
+});
+
+Then('El usuario ingresa el Codigo Postal letras', async function () {
+    console.log("El usuario ingresa el Codigo Postal letras");
+    await DriverFactory.myDriver.sleep(4000);
+    await DriverFactory.myDriver.wait(until.urlContains('https://magento2-demo.magebit.com/checkout/#shipping'), configuration.browser.timeout);
+
+    const firstName = environment.demo.userShippingAddress.firstName;
+    const lastName = environment.demo.userShippingAddress.lastName;
+    const company = environment.demo.userShippingAddress.company;
+    const streetAddress = environment.demo.userShippingAddress.streetAddress;
+    const stateValue = "5";
+    const city = environment.demo.userShippingAddress.city;
+    const postcode = DataGenerator.generateLetters(20);
+    const phoneNumber = environment.demo.userShippingAddress.phoneNumber;
+
+    await ShippingAdressPage.enterFirstName(firstName);
+    await ShippingAdressPage.enterLastName(lastName);
+    await ShippingAdressPage.enterCompany(company);
+    await ShippingAdressPage.enterStreetAddress(streetAddress);
+    await ShippingAdressPage.selectState(stateValue);
+    await ShippingAdressPage.enterCity(city);
+    await ShippingAdressPage.enterPostcode(postcode);
+    await ShippingAdressPage.enterTelephone(phoneNumber);
+    await ShippingAdressPage.selectShippingMethod();
+});
+
+Then('El usuario ingresa el Codigo Postal alfanumericos', async function () {
+    console.log("El usuario ingresa el Codigo Postal alfanumericos");
+    await DriverFactory.myDriver.sleep(4000);
+    await DriverFactory.myDriver.wait(until.urlContains('https://magento2-demo.magebit.com/checkout/#shipping'), configuration.browser.timeout);
+
+    const firstName = environment.demo.userShippingAddress.firstName;
+    const lastName = environment.demo.userShippingAddress.lastName;
+    const company = environment.demo.userShippingAddress.company;
+    const streetAddress = environment.demo.userShippingAddress.streetAddress;
+    const stateValue = "5";
+    const city = environment.demo.userShippingAddress.city;
+    const postcode = DataGenerator.generateAlphanumeric(20);
+    const phoneNumber = environment.demo.userShippingAddress.phoneNumber;
+
+    await ShippingAdressPage.enterFirstName(firstName);
+    await ShippingAdressPage.enterLastName(lastName);
+    await ShippingAdressPage.enterCompany(company);
+    await ShippingAdressPage.enterStreetAddress(streetAddress);
+    await ShippingAdressPage.selectState(stateValue);
+    await ShippingAdressPage.enterCity(city);
+    await ShippingAdressPage.enterPostcode(postcode);
+    await ShippingAdressPage.enterTelephone(phoneNumber);
+    await ShippingAdressPage.selectShippingMethod();
+});

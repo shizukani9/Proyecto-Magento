@@ -265,7 +265,7 @@ Scenario: DE-24: Verificar que cuando se ingresa una Ciudad (City) con caractere
         And El usuario guarda la dirección
         And Se muestra un mensaje de error
 
-@createAccount @deleteAccount @funcional_Positivo @DE-25 @Iteracion2 @fail @shopping
+@createAccount @deleteAccount @funcional_Positivo @DE-25 @Iteracion2 @pass @shopping
 Scenario: DE-25: Verificar que cuando se selecciona una Estado/Provincia (State/Province) entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -287,7 +287,7 @@ Scenario: DE-26: Verificar que cuando no se selecciona una Estado/Provincia (Sta
         And El usuario guarda la dirección
         And Se muestra un mensaje de error en el nombre menciona que el campo requerido
 
-@createAccount @deleteAccount @funcional_Positivo @DE-27 @Iteracion2 @fail @shopping
+@createAccount @deleteAccount @funcional_Positivo @DE-27 @Iteracion2 @pass @shopping
 Scenario: DE-27: Verificar que cuando se ingresa un Código Postal (Zip/Postal Code) con 5 caracteres entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -297,3 +297,36 @@ Scenario: DE-27: Verificar que cuando se ingresa un Código Postal (Zip/Postal C
     Then El usuario ingresa el Codigo Postal vacio
         And El usuario guarda la dirección
         And Se muestra un mensaje de error que el campo requerido
+
+@createAccount @deleteAccount @funcional_Positivo @DE-28 @Iteracion2 @pass @shopping
+Scenario: DE-28: Verificar que cuando se ingresa un Código Postal (Zip/Postal Code) con 5 caracteres entonces la dirección se guarda correctamente.
+    Given El usuario está en la página de inicio
+        And El usuario navega a página de Yoga Collection
+    When El usuario añade un producto al carrito
+    Then La cantidad de productos en el carrito debe actualizarse en la pagina Checkout cart
+    Then El usuario procede a confirmar el producto para la compra
+    Then El usuario ingresa el Codigo Postal con 5 caracteres
+        And El usuario guarda la dirección
+        And La dirección debe guardarse correctamente sin errores
+
+@createAccount @deleteAccount @funcional_Positivo @DE-29 @Iteracion2 @fail @shopping
+Scenario: DE-29: Verificar que cuando se ingresa un Código Postal (Zip/Postal Code) con letras entonces se muestra un mensaje de error.
+    Given El usuario está en la página de inicio
+        And El usuario navega a página de Yoga Collection
+    When El usuario añade un producto al carrito
+    Then La cantidad de productos en el carrito debe actualizarse en la pagina Checkout cart
+    Then El usuario procede a confirmar el producto para la compra
+    Then El usuario ingresa el Codigo Postal letras
+        And El usuario guarda la dirección
+        And Se muestra un mensaje de error
+
+@createAccount @deleteAccount @funcional_Positivo @DE-30 @Iteracion2 @fail @shopping
+Scenario: DE-30: Verificar que cuando se ingresa un Código Postal (Zip/Postal Code) con alfanumérico entonces se muestra un mensaje de error.
+    Given El usuario está en la página de inicio
+        And El usuario navega a página de Yoga Collection
+    When El usuario añade un producto al carrito
+    Then La cantidad de productos en el carrito debe actualizarse en la pagina Checkout cart
+    Then El usuario procede a confirmar el producto para la compra
+    Then El usuario ingresa el Codigo Postal alfanumericos
+        And El usuario guarda la dirección
+        And Se muestra un mensaje de error
