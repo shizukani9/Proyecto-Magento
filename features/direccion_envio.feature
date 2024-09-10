@@ -43,7 +43,7 @@ Scenario: DE-4: Verificar que cuando se ingresa un Nombre (First Name) vacío en
     Then El usuario procede a confirmar el producto para la compra
     Then El usuario ingresa el nombre vacio
         And El usuario guarda la dirección
-        And Se muestra un mensaje de error en el nombre menciona que el campo requerido
+        And Se muestra un mensaje de error que el campo requerido
 
 @createAccount @deleteAccount @funcional_Positivo @DE-5 @Iteracion2 @fail @shopping
 Scenario: DE-5: Verificar que cuando se ingresa un Nombre (First Name) con números entonces se muestra un mensaje de error.
@@ -109,7 +109,7 @@ Scenario: DE-10: Verificar que cuando se ingresa un Apellido (Last Name) vacío 
     Then El usuario procede a confirmar el producto para la compra
     Then El usuario ingresa el apellido vacio
         And El usuario guarda la dirección
-        And Se muestra un mensaje de error en el apellido menciona que el campo requerido
+        And Se muestra un mensaje de error que el campo requerido
 
 @createAccount @deleteAccount @funcional_Positivo @DE-11 @Iteracion2 @fail @shopping
 Scenario: DE-11: Verificar que cuando se ingresa un Apellido (Last Name) con números entonces se muestra un mensaje de error.
@@ -275,3 +275,25 @@ Scenario: DE-25: Verificar que cuando se selecciona una Estado/Provincia (State/
     Then El usuario ingresa el Estado Provincia
         And El usuario guarda la dirección
         And La dirección debe guardarse correctamente sin errores
+
+@createAccount @deleteAccount @funcional_Positivo @DE-26 @Iteracion2 @fail @shopping
+Scenario: DE-26: Verificar que cuando no se selecciona una Estado/Provincia (State/Province) entonces la dirección no se guarda correctamente.
+    Given El usuario está en la página de inicio
+        And El usuario navega a página de Yoga Collection
+    When El usuario añade un producto al carrito
+    Then La cantidad de productos en el carrito debe actualizarse en la pagina Checkout cart
+    Then El usuario procede a confirmar el producto para la compra
+    Then El usuario no ingresa el Estado Provincia
+        And El usuario guarda la dirección
+        And Se muestra un mensaje de error en el nombre menciona que el campo requerido
+
+@createAccount @deleteAccount @funcional_Positivo @DE-27 @Iteracion2 @fail @shopping
+Scenario: DE-27: Verificar que cuando se ingresa un Código Postal (Zip/Postal Code) con 5 caracteres entonces la dirección se guarda correctamente.
+    Given El usuario está en la página de inicio
+        And El usuario navega a página de Yoga Collection
+    When El usuario añade un producto al carrito
+    Then La cantidad de productos en el carrito debe actualizarse en la pagina Checkout cart
+    Then El usuario procede a confirmar el producto para la compra
+    Then El usuario ingresa el Codigo Postal vacio
+        And El usuario guarda la dirección
+        And Se muestra un mensaje de error que el campo requerido
