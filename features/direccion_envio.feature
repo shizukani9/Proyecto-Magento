@@ -209,3 +209,69 @@ Scenario: DE-19: Verificar que cuando se ingresa una Dirección (Street Address)
     Then El usuario ingresa la Dirección con mas 255 caracteres
         And El usuario guarda la dirección
         And Se muestra un mensaje de error de mas de 255 caracteres
+
+@createAccount @deleteAccount @funcional_Positivo @DE-20 @Iteracion2 @pass @shopping
+Scenario: DE-20: Verificar que cuando se ingresa el nombre de una Ciudad (City) con 1 carácter entonces la dirección se guarda correctamente.
+    Given El usuario está en la página de inicio
+        And El usuario navega a página de Yoga Collection
+    When El usuario añade un producto al carrito
+    Then La cantidad de productos en el carrito debe actualizarse en la pagina Checkout cart
+    Then El usuario procede a confirmar el producto para la compra
+    Then El usuario ingresa la Ciudad con 1 caracter
+        And El usuario guarda la dirección
+        And La dirección debe guardarse correctamente sin errores
+
+@createAccount @deleteAccount @funcional_Positivo @DE-21 @Iteracion2 @pass @shopping
+Scenario: DE-21: Verificar que cuando se ingresa una Ciudad (City) con 255 caracteres entonces la dirección se guarda correctamente.
+    Given El usuario está en la página de inicio
+        And El usuario navega a página de Yoga Collection
+    When El usuario añade un producto al carrito
+    Then La cantidad de productos en el carrito debe actualizarse en la pagina Checkout cart
+    Then El usuario procede a confirmar el producto para la compra
+    Then El usuario ingresa la Ciudad con 255 caracteres
+        And El usuario guarda la dirección
+        And La dirección debe guardarse correctamente sin errores
+
+@createAccount @deleteAccount @funcional_Positivo @DE-22 @Iteracion2 @pass @shopping
+Scenario: DE-22: Verificar que cuando se ingresa una Ciudad (City) con más de 255 caracteres entonces se muestra un mensaje de error.
+    Given El usuario está en la página de inicio
+        And El usuario navega a página de Yoga Collection
+    When El usuario añade un producto al carrito
+    Then La cantidad de productos en el carrito debe actualizarse en la pagina Checkout cart
+    Then El usuario procede a confirmar el producto para la compra
+    Then El usuario ingresa la Ciudad con mas 255 caracteres
+        And El usuario guarda la dirección
+        And Se muestra un mensaje de error de mas de 255 caracteres
+
+@createAccount @deleteAccount @funcional_Positivo @DE-23 @Iteracion2 @fail @shopping
+Scenario: DE-23: Verificar que cuando se ingresa una Ciudad (City) con números entonces se muestra un mensaje de error.
+    Given El usuario está en la página de inicio
+        And El usuario navega a página de Yoga Collection
+    When El usuario añade un producto al carrito
+    Then La cantidad de productos en el carrito debe actualizarse en la pagina Checkout cart
+    Then El usuario procede a confirmar el producto para la compra
+    Then El usuario ingresa la Ciudad con numeros
+        And El usuario guarda la dirección
+        And Se muestra un mensaje de error
+
+@createAccount @deleteAccount @funcional_Positivo @DE-24 @Iteracion2 @fail @shopping
+Scenario: DE-24: Verificar que cuando se ingresa una Ciudad (City) con caracteres alfanuméricos entonces se muestra un mensaje de error.
+    Given El usuario está en la página de inicio
+        And El usuario navega a página de Yoga Collection
+    When El usuario añade un producto al carrito
+    Then La cantidad de productos en el carrito debe actualizarse en la pagina Checkout cart
+    Then El usuario procede a confirmar el producto para la compra
+    Then El usuario ingresa la Ciudad con alfanumericos
+        And El usuario guarda la dirección
+        And Se muestra un mensaje de error
+
+@createAccount @deleteAccount @funcional_Positivo @DE-25 @Iteracion2 @fail @shopping
+Scenario: DE-25: Verificar que cuando se selecciona una Estado/Provincia (State/Province) entonces la dirección se guarda correctamente.
+    Given El usuario está en la página de inicio
+        And El usuario navega a página de Yoga Collection
+    When El usuario añade un producto al carrito
+    Then La cantidad de productos en el carrito debe actualizarse en la pagina Checkout cart
+    Then El usuario procede a confirmar el producto para la compra
+    Then El usuario ingresa el Estado Provincia
+        And El usuario guarda la dirección
+        And La dirección debe guardarse correctamente sin errores
