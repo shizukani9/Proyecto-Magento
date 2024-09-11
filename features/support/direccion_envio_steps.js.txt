@@ -13,56 +13,6 @@ const environment = require("../../environment.json");
 const configuration = require("../../configuration.json");
 const { until, By, Select } = require('selenium-webdriver');
 
-Then('La dirección debe guardarse correctamente sin errores', async function () {
-    console.log("La dirección debe guardarse correctamente sin errores");
-    await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/checkout/#payment"), configuration.browser.extendedTimeout);
-    const expectedUrl = "https://magento2-demo.magebit.com/checkout/#payment";
-    const currentUrl = await DriverFactory.myDriver.getCurrentUrl();
-    expect(currentUrl).to.equal(expectedUrl, `La URL actual (${currentUrl}) no coincide con la esperada (${expectedUrl})`);
-});
-
-Then('Se muestra un mensaje de error', async function () {
-    console.log("Se muestra un mensaje de error");
-    const errorMessageFirstName2 = await DriverFactory.myDriver.wait(until.elementLocated(ShippingAdressPage.errorMessageFirstName2),configuration.browser.timeout);
-    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", errorMessageFirstName2);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(errorMessageFirstName2), configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(errorMessageFirstName2), configuration.browser.timeout);
-    
-    const expectedMessage = "Please enter only letters";
-    const messageText = await this.getErrorMessageFirstNameEmpty();
-        if (messageText.trim() !== expectedMessage) {
-            throw new Error(`El mensaje obtenido fue: "${messageText}", pero se esperaba: "${expectedMessage}".`);
-        }
-});
-
-Then('Se muestra un mensaje de error que el campo requerido', async function () {
-    console.log("Se muestra un mensaje de error que el campo requerido");
-    const errorMessageFirstName2 = await DriverFactory.myDriver.wait(until.elementLocated(ShippingAdressPage.errorMessageFirstName2),configuration.browser.timeout);
-    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", errorMessageFirstName2);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(errorMessageFirstName2), configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(errorMessageFirstName2), configuration.browser.timeout);
-    
-    const expectedMessage = "This is a required field.";
-    const messageText = await errorMessageFirstName2.getText();
-        if (messageText !== expectedMessage) {
-            throw new Error(`El mensaje obtenido fue: "${messageText}", pero se esperaba: "${expectedMessage}".`);
-        }
-});
-
-Then('Se muestra un mensaje de error de mas de 255 caracteres', async function () {
-    console.log("Se muestra un mensaje de error de mas de 255 caracteres");
-    const errorMessageFirstName1 = await DriverFactory.myDriver.wait(until.elementLocated(ShippingAdressPage.errorMessageFirstName1),configuration.browser.timeout);
-    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", errorMessageFirstName1);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(errorMessageFirstName1), configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(errorMessageFirstName1), configuration.browser.timeout);
-   
-    const expectedMessage = "Please enter less or equal than 255 symbols.";
-    const messageText = await errorMessageFirstName1.getText();
-        if (messageText  !== expectedMessage) {
-            throw new Error(`El mensaje obtenido fue: "${messageText }", pero se esperaba: "${expectedMessage}".`);
-        }
-});
-
 Then('El usuario ingresa el nombre con solo 1 carácter', async function () {
     console.log("El usuario ingresa el nombre con solo 1 carácter");
     await DriverFactory.myDriver.sleep(4000);
@@ -86,6 +36,42 @@ Then('El usuario ingresa el nombre con solo 1 carácter', async function () {
     await ShippingAdressPage.enterPostcode(postcode);
     await ShippingAdressPage.enterTelephone(phoneNumber);
     await ShippingAdressPage.selectShippingMethod();
+});
+
+Then('La dirección debe guardarse correctamente sin errores', async function () {
+    console.log("La dirección debe guardarse correctamente sin errores");
+    await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/checkout/#payment"), configuration.browser.extendedTimeout);
+    const expectedUrl = "https://magento2-demo.magebit.com/checkout/#payment";
+    const currentUrl = await DriverFactory.myDriver.getCurrentUrl();
+    expect(currentUrl).to.equal(expectedUrl, `La URL actual (${currentUrl}) no coincide con la esperada (${expectedUrl})`);
+});
+
+Then('Se muestra un mensaje de error en el nombre menciona que el campo requerido', async function () {
+    console.log("Se muestra un mensaje de error en el nombre menciona que el campo requerido");
+    const errorMessageFirstName2 = await DriverFactory.myDriver.wait(until.elementLocated(ShippingAdressPage.errorMessageFirstName2),configuration.browser.timeout);
+    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", errorMessageFirstName2);
+    await DriverFactory.myDriver.wait(until.elementIsVisible(errorMessageFirstName2), configuration.browser.timeout);
+    await DriverFactory.myDriver.wait(until.elementIsEnabled(errorMessageFirstName2), configuration.browser.timeout);
+    
+    const expectedMessage = "This is a required field.";
+    const messageText = await errorMessageFirstName2.getText();
+        if (messageText !== expectedMessage) {
+            throw new Error(`El mensaje obtenido fue: "${messageText}", pero se esperaba: "${expectedMessage}".`);
+        }
+});
+
+Then('Se muestra un mensaje de error', async function () {
+    console.log("Se muestra un mensaje de error");
+    const errorMessageFirstName2 = await DriverFactory.myDriver.wait(until.elementLocated(ShippingAdressPage.errorMessageFirstName2),configuration.browser.timeout);
+    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", errorMessageFirstName2);
+    await DriverFactory.myDriver.wait(until.elementIsVisible(errorMessageFirstName2), configuration.browser.timeout);
+    await DriverFactory.myDriver.wait(until.elementIsEnabled(errorMessageFirstName2), configuration.browser.timeout);
+    
+    const expectedMessage = "Please enter only letters";
+    const messageText = await this.getErrorMessageFirstNameEmpty();
+        if (messageText.trim() !== expectedMessage) {
+            throw new Error(`El mensaje obtenido fue: "${messageText}", pero se esperaba: "${expectedMessage}".`);
+        }
 });
 
 Then('El usuario ingresa el nombre con 255 caracteres', async function () {
@@ -288,6 +274,20 @@ Then('El usuario ingresa el apellido con mas 255 caracteres', async function () 
     await ShippingAdressPage.selectShippingMethod();
 });
 
+Then('Se muestra un mensaje de error de mas de 255 caracteres', async function () {
+    console.log("Se muestra un mensaje de error de mas de 255 caracteres");
+    const errorMessageFirstName1 = await DriverFactory.myDriver.wait(until.elementLocated(ShippingAdressPage.errorMessageFirstName1),configuration.browser.timeout);
+    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", errorMessageFirstName1);
+    await DriverFactory.myDriver.wait(until.elementIsVisible(errorMessageFirstName1), configuration.browser.timeout);
+    await DriverFactory.myDriver.wait(until.elementIsEnabled(errorMessageFirstName1), configuration.browser.timeout);
+   
+    const expectedMessage = "Please enter less or equal than 255 symbols.";
+    const messageText = await errorMessageFirstName1.getText();
+        if (messageText  !== expectedMessage) {
+            throw new Error(`El mensaje obtenido fue: "${messageText }", pero se esperaba: "${expectedMessage}".`);
+        }
+});
+
 Then('El usuario ingresa el apellido vacio', async function () {
     console.log("El usuario ingresa el apellido vacio");
     await DriverFactory.myDriver.sleep(4000);
@@ -311,6 +311,20 @@ Then('El usuario ingresa el apellido vacio', async function () {
     await ShippingAdressPage.enterPostcode(postcode);
     await ShippingAdressPage.enterTelephone(phoneNumber);
     await ShippingAdressPage.selectShippingMethod();
+});
+
+Then('Se muestra un mensaje de error que el campo requerido', async function () {
+    console.log("Se muestra un mensaje de error que el campo requerido");
+    const errorMessageFirstName2 = await DriverFactory.myDriver.wait(until.elementLocated(ShippingAdressPage.errorMessageFirstName2),configuration.browser.timeout);
+    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", errorMessageFirstName2);
+    await DriverFactory.myDriver.wait(until.elementIsVisible(errorMessageFirstName2), configuration.browser.timeout);
+    await DriverFactory.myDriver.wait(until.elementIsEnabled(errorMessageFirstName2), configuration.browser.timeout);
+    
+    const expectedMessage = "This is a required field.";
+    const messageText = await errorMessageFirstName2.getText();
+        if (messageText !== expectedMessage) {
+            throw new Error(`El mensaje obtenido fue: "${messageText}", pero se esperaba: "${expectedMessage}".`);
+        }
 });
 
 Then('El usuario ingresa el apellido con numeros', async function () {
@@ -346,6 +360,31 @@ Then('El usuario ingresa el apellido con alfanumericos', async function () {
     const firstName = environment.demo.userShippingAddress.firstName;
     const lastName = DataGenerator.generateAlphanumeric(20);
     const company = environment.demo.userShippingAddress.company;
+    const streetAddress = environment.demo.userShippingAddress.streetAddress;
+    const stateValue = "2";
+    const city = environment.demo.userShippingAddress.city;
+    const postcode = environment.demo.userShippingAddress.zipPostal;
+    const phoneNumber = environment.demo.userShippingAddress.phoneNumber;
+
+    await ShippingAdressPage.enterFirstName(firstName);
+    await ShippingAdressPage.enterLastName(lastName);
+    await ShippingAdressPage.enterCompany(company);
+    await ShippingAdressPage.enterStreetAddress(streetAddress);
+    await ShippingAdressPage.selectState(stateValue);
+    await ShippingAdressPage.enterCity(city);
+    await ShippingAdressPage.enterPostcode(postcode);
+    await ShippingAdressPage.enterTelephone(phoneNumber);
+    await ShippingAdressPage.selectShippingMethod();
+});
+
+Then('El usuario ingresa la compania vacio', async function () {
+    console.log("El usuario ingresa la compania vacio");
+    await DriverFactory.myDriver.sleep(4000);
+    await DriverFactory.myDriver.wait(until.urlContains('https://magento2-demo.magebit.com/checkout/#shipping'), configuration.browser.timeout);
+
+    const firstName = environment.demo.userShippingAddress.firstName;
+    const lastName = environment.demo.userShippingAddress.lastName;
+    const company = "";
     const streetAddress = environment.demo.userShippingAddress.streetAddress;
     const stateValue = "2";
     const city = environment.demo.userShippingAddress.city;
@@ -421,31 +460,6 @@ Then('El usuario ingresa la compania con mas 255 caracteres', async function () 
     const firstName = environment.demo.userShippingAddress.firstName;
     const lastName = environment.demo.userShippingAddress.lastName;
     const company = DataGenerator.generateLetters(300);
-    const streetAddress = environment.demo.userShippingAddress.streetAddress;
-    const stateValue = "2";
-    const city = environment.demo.userShippingAddress.city;
-    const postcode = environment.demo.userShippingAddress.zipPostal;
-    const phoneNumber = environment.demo.userShippingAddress.phoneNumber;
-
-    await ShippingAdressPage.enterFirstName(firstName);
-    await ShippingAdressPage.enterLastName(lastName);
-    await ShippingAdressPage.enterCompany(company);
-    await ShippingAdressPage.enterStreetAddress(streetAddress);
-    await ShippingAdressPage.selectState(stateValue);
-    await ShippingAdressPage.enterCity(city);
-    await ShippingAdressPage.enterPostcode(postcode);
-    await ShippingAdressPage.enterTelephone(phoneNumber);
-    await ShippingAdressPage.selectShippingMethod();
-});
-
-Then('El usuario ingresa la compania vacio', async function () {
-    console.log("El usuario ingresa la compania vacio");
-    await DriverFactory.myDriver.sleep(4000);
-    await DriverFactory.myDriver.wait(until.urlContains('https://magento2-demo.magebit.com/checkout/#shipping'), configuration.browser.timeout);
-
-    const firstName = environment.demo.userShippingAddress.firstName;
-    const lastName = environment.demo.userShippingAddress.lastName;
-    const company = "";
     const streetAddress = environment.demo.userShippingAddress.streetAddress;
     const stateValue = "2";
     const city = environment.demo.userShippingAddress.city;
@@ -613,55 +627,7 @@ Then('El usuario ingresa la Dirección vacio', async function () {
     await ShippingAdressPage.selectShippingMethod();
 });
 
-Then('El usuario ingresa la Dirección con numeros', async function () {
-    console.log("El usuario ingresa la Dirección con numeros");
-    await DriverFactory.myDriver.sleep(4000);
-    await DriverFactory.myDriver.wait(until.urlContains('https://magento2-demo.magebit.com/checkout/#shipping'), configuration.browser.timeout);
 
-    const firstName = environment.demo.userShippingAddress.firstName;
-    const lastName = environment.demo.userShippingAddress.lastName;
-    const company = environment.demo.userShippingAddress.company;
-    const streetAddress = DataGenerator.generateRandomNumber(10);
-    const stateValue = "2";
-    const city = environment.demo.userShippingAddress.city;
-    const postcode = environment.demo.userShippingAddress.zipPostal;
-    const phoneNumber = environment.demo.userShippingAddress.phoneNumber;
-
-    await ShippingAdressPage.enterFirstName(firstName);
-    await ShippingAdressPage.enterLastName(lastName);
-    await ShippingAdressPage.enterCompany(company);
-    await ShippingAdressPage.enterStreetAddress(streetAddress);
-    await ShippingAdressPage.selectState(stateValue);
-    await ShippingAdressPage.enterCity(city);
-    await ShippingAdressPage.enterPostcode(postcode);
-    await ShippingAdressPage.enterTelephone(phoneNumber);
-    await ShippingAdressPage.selectShippingMethod();
-});
-
-Then('El usuario ingresa la Dirección con alfanumericos', async function () {
-    console.log("El usuario ingresa la Dirección con alfanumericos");
-    await DriverFactory.myDriver.sleep(4000);
-    await DriverFactory.myDriver.wait(until.urlContains('https://magento2-demo.magebit.com/checkout/#shipping'), configuration.browser.timeout);
-
-    const firstName = environment.demo.userShippingAddress.firstName;
-    const lastName = environment.demo.userShippingAddress.lastName;
-    const company = environment.demo.userShippingAddress.company;
-    const streetAddress = DataGenerator.generateAlphanumeric(20);
-    const stateValue = "2";
-    const city = environment.demo.userShippingAddress.city;
-    const postcode = environment.demo.userShippingAddress.zipPostal;
-    const phoneNumber = environment.demo.userShippingAddress.phoneNumber;
-
-    await ShippingAdressPage.enterFirstName(firstName);
-    await ShippingAdressPage.enterLastName(lastName);
-    await ShippingAdressPage.enterCompany(company);
-    await ShippingAdressPage.enterStreetAddress(streetAddress);
-    await ShippingAdressPage.selectState(stateValue);
-    await ShippingAdressPage.enterCity(city);
-    await ShippingAdressPage.enterPostcode(postcode);
-    await ShippingAdressPage.enterTelephone(phoneNumber);
-    await ShippingAdressPage.selectShippingMethod();
-});
 
 Then('El usuario ingresa la Ciudad con 1 caracter', async function () {
     console.log("El usuario ingresa la Ciudad con 1 caracter");
@@ -838,79 +804,18 @@ Then('El usuario no ingresa el Estado Provincia', async function () {
     await ShippingAdressPage.selectShippingMethod();
 });
 
-Then('El usuario ingresa el Codigo Postal con 5 caracteres numericos', async function () {
-    console.log("El usuario ingresa el Codigo Postal con 5 caracteres numericos");
-    await DriverFactory.myDriver.sleep(4000);
-    await DriverFactory.myDriver.wait(until.urlContains('https://magento2-demo.magebit.com/checkout/#shipping'), configuration.browser.timeout);
-
-    const firstName = environment.demo.userShippingAddress.firstName;
-    const lastName = environment.demo.userShippingAddress.lastName;
-    const company = environment.demo.userShippingAddress.company;
-    const streetAddress = environment.demo.userShippingAddress.streetAddress;
-    const stateValue = "5";
-    const city = environment.demo.userShippingAddress.city;
-    const postcode = DataGenerator.generateRandomNumber(5);
-    const phoneNumber = environment.demo.userShippingAddress.phoneNumber;
-
-    await ShippingAdressPage.enterFirstName(firstName);
-    await ShippingAdressPage.enterLastName(lastName);
-    await ShippingAdressPage.enterCompany(company);
-    await ShippingAdressPage.enterStreetAddress(streetAddress);
-    await ShippingAdressPage.selectState(stateValue);
-    await ShippingAdressPage.enterCity(city);
-    await ShippingAdressPage.enterPostcode(postcode);
-    await ShippingAdressPage.enterTelephone(phoneNumber);
-    await ShippingAdressPage.selectShippingMethod();
-});
-
-Then('El usuario ingresa el Codigo Postal con 255 caracteres numericos', async function () {
-    console.log("El usuario ingresa el Codigo Postal con 255 caracteres numericos");
-    await DriverFactory.myDriver.sleep(4000);
-    await DriverFactory.myDriver.wait(until.urlContains('https://magento2-demo.magebit.com/checkout/#shipping'), configuration.browser.timeout);
-
-    const firstName = environment.demo.userShippingAddress.firstName;
-    const lastName = environment.demo.userShippingAddress.lastName;
-    const company = environment.demo.userShippingAddress.company;
-    const streetAddress = environment.demo.userShippingAddress.streetAddress;
-    const stateValue = "5";
-    const city = environment.demo.userShippingAddress.city;
-    const postcode = DataGenerator.generateRandomNumber(255);
-    const phoneNumber = environment.demo.userShippingAddress.phoneNumber;
-
-    await ShippingAdressPage.enterFirstName(firstName);
-    await ShippingAdressPage.enterLastName(lastName);
-    await ShippingAdressPage.enterCompany(company);
-    await ShippingAdressPage.enterStreetAddress(streetAddress);
-    await ShippingAdressPage.selectState(stateValue);
-    await ShippingAdressPage.enterCity(city);
-    await ShippingAdressPage.enterPostcode(postcode);
-    await ShippingAdressPage.enterTelephone(phoneNumber);
-    await ShippingAdressPage.selectShippingMethod();
-});
-
-Then('El usuario ingresa el Codigo Postal con mas 255 caracteres numericos', async function () {
-    console.log("El usuario ingresa el Codigo Postal con mas 255 caracteres numericos");
-    await DriverFactory.myDriver.sleep(4000);
-    await DriverFactory.myDriver.wait(until.urlContains('https://magento2-demo.magebit.com/checkout/#shipping'), configuration.browser.timeout);
-
-    const firstName = environment.demo.userShippingAddress.firstName;
-    const lastName = environment.demo.userShippingAddress.lastName;
-    const company = environment.demo.userShippingAddress.company;
-    const streetAddress = environment.demo.userShippingAddress.streetAddress;
-    const stateValue = "5";
-    const city = environment.demo.userShippingAddress.city;
-    const postcode = DataGenerator.generateRandomNumber(300);
-    const phoneNumber = environment.demo.userShippingAddress.phoneNumber;
-
-    await ShippingAdressPage.enterFirstName(firstName);
-    await ShippingAdressPage.enterLastName(lastName);
-    await ShippingAdressPage.enterCompany(company);
-    await ShippingAdressPage.enterStreetAddress(streetAddress);
-    await ShippingAdressPage.selectState(stateValue);
-    await ShippingAdressPage.enterCity(city);
-    await ShippingAdressPage.enterPostcode(postcode);
-    await ShippingAdressPage.enterTelephone(phoneNumber);
-    await ShippingAdressPage.selectShippingMethod();
+Then('Se muestra un mensaje de error Estado Provincia', async function () {
+    console.log("Se muestra un mensaje de error Estado Provincia");
+    const errorMessageFirstName2 = await DriverFactory.myDriver.wait(until.elementLocated(ShippingAdressPage.errorMessageFirstName2),configuration.browser.timeout);
+    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", errorMessageFirstName2);
+    await DriverFactory.myDriver.wait(until.elementIsVisible(errorMessageFirstName2), configuration.browser.timeout);
+    await DriverFactory.myDriver.wait(until.elementIsEnabled(errorMessageFirstName2), configuration.browser.timeout);
+    
+    const expectedMessage = "Please enter only letters";
+    const messageText = await this.getErrorMessageFirstNameEmpty();
+        if (messageText.trim() !== expectedMessage) {
+            throw new Error(`El mensaje obtenido fue: "${messageText}", pero se esperaba: "${expectedMessage}".`);
+        }
 });
 
 Then('El usuario ingresa el Codigo Postal vacio', async function () {
@@ -925,6 +830,31 @@ Then('El usuario ingresa el Codigo Postal vacio', async function () {
     const stateValue = "5";
     const city = environment.demo.userShippingAddress.city;
     const postcode = "";
+    const phoneNumber = environment.demo.userShippingAddress.phoneNumber;
+
+    await ShippingAdressPage.enterFirstName(firstName);
+    await ShippingAdressPage.enterLastName(lastName);
+    await ShippingAdressPage.enterCompany(company);
+    await ShippingAdressPage.enterStreetAddress(streetAddress);
+    await ShippingAdressPage.selectState(stateValue);
+    await ShippingAdressPage.enterCity(city);
+    await ShippingAdressPage.enterPostcode(postcode);
+    await ShippingAdressPage.enterTelephone(phoneNumber);
+    await ShippingAdressPage.selectShippingMethod();
+});
+
+Then('El usuario ingresa el Codigo Postal con 5 caracteres', async function () {
+    console.log("El usuario ingresa el Codigo Postal con 5 caracteres");
+    await DriverFactory.myDriver.sleep(4000);
+    await DriverFactory.myDriver.wait(until.urlContains('https://magento2-demo.magebit.com/checkout/#shipping'), configuration.browser.timeout);
+
+    const firstName = environment.demo.userShippingAddress.firstName;
+    const lastName = environment.demo.userShippingAddress.lastName;
+    const company = environment.demo.userShippingAddress.company;
+    const streetAddress = environment.demo.userShippingAddress.streetAddress;
+    const stateValue = "5";
+    const city = environment.demo.userShippingAddress.city;
+    const postcode = DataGenerator.generateRandomNumber(5);
     const phoneNumber = environment.demo.userShippingAddress.phoneNumber;
 
     await ShippingAdressPage.enterFirstName(firstName);
@@ -976,131 +906,6 @@ Then('El usuario ingresa el Codigo Postal alfanumericos', async function () {
     const city = environment.demo.userShippingAddress.city;
     const postcode = DataGenerator.generateAlphanumeric(20);
     const phoneNumber = environment.demo.userShippingAddress.phoneNumber;
-
-    await ShippingAdressPage.enterFirstName(firstName);
-    await ShippingAdressPage.enterLastName(lastName);
-    await ShippingAdressPage.enterCompany(company);
-    await ShippingAdressPage.enterStreetAddress(streetAddress);
-    await ShippingAdressPage.selectState(stateValue);
-    await ShippingAdressPage.enterCity(city);
-    await ShippingAdressPage.enterPostcode(postcode);
-    await ShippingAdressPage.enterTelephone(phoneNumber);
-    await ShippingAdressPage.selectShippingMethod();
-});
-
-Then('El usuario ingresa el Teléfono con 7 caracteres numericos', async function () {
-    console.log("El usuario ingresa el Teléfono con 7 caracteres numericos");
-    await DriverFactory.myDriver.sleep(4000);
-    await DriverFactory.myDriver.wait(until.urlContains('https://magento2-demo.magebit.com/checkout/#shipping'), configuration.browser.timeout);
-
-    const firstName = environment.demo.userShippingAddress.firstName;
-    const lastName = environment.demo.userShippingAddress.lastName;
-    const company = environment.demo.userShippingAddress.company;
-    const streetAddress = environment.demo.userShippingAddress.streetAddress;
-    const stateValue = "5";
-    const city = environment.demo.userShippingAddress.city;
-    const postcode = environment.demo.userShippingAddress.zipPostal;
-    const phoneNumber = DataGenerator.generateRandomNumber(7);
-
-    await ShippingAdressPage.enterFirstName(firstName);
-    await ShippingAdressPage.enterLastName(lastName);
-    await ShippingAdressPage.enterCompany(company);
-    await ShippingAdressPage.enterStreetAddress(streetAddress);
-    await ShippingAdressPage.selectState(stateValue);
-    await ShippingAdressPage.enterCity(city);
-    await ShippingAdressPage.enterPostcode(postcode);
-    await ShippingAdressPage.enterTelephone(phoneNumber);
-    await ShippingAdressPage.selectShippingMethod();
-});
-
-Then('El usuario ingresa el Teléfono con 15 caracteres numericos', async function () {
-    console.log("El usuario ingresa el Teléfono con 15 caracteres numericos");
-    await DriverFactory.myDriver.sleep(4000);
-    await DriverFactory.myDriver.wait(until.urlContains('https://magento2-demo.magebit.com/checkout/#shipping'), configuration.browser.timeout);
-
-    const firstName = environment.demo.userShippingAddress.firstName;
-    const lastName = environment.demo.userShippingAddress.lastName;
-    const company = environment.demo.userShippingAddress.company;
-    const streetAddress = environment.demo.userShippingAddress.streetAddress;
-    const stateValue = "5";
-    const city = environment.demo.userShippingAddress.city;
-    const postcode = environment.demo.userShippingAddress.zipPostal;
-    const phoneNumber = DataGenerator.generateRandomNumber(15);
-
-    await ShippingAdressPage.enterFirstName(firstName);
-    await ShippingAdressPage.enterLastName(lastName);
-    await ShippingAdressPage.enterCompany(company);
-    await ShippingAdressPage.enterStreetAddress(streetAddress);
-    await ShippingAdressPage.selectState(stateValue);
-    await ShippingAdressPage.enterCity(city);
-    await ShippingAdressPage.enterPostcode(postcode);
-    await ShippingAdressPage.enterTelephone(phoneNumber);
-    await ShippingAdressPage.selectShippingMethod();
-});
-
-Then('El usuario ingresa el Teléfono con mas de 255 caracteres numericos', async function () {
-    console.log("El usuario ingresa el Teléfono con mas de 255 caracteres numericos");
-    await DriverFactory.myDriver.sleep(4000);
-    await DriverFactory.myDriver.wait(until.urlContains('https://magento2-demo.magebit.com/checkout/#shipping'), configuration.browser.timeout);
-
-    const firstName = environment.demo.userShippingAddress.firstName;
-    const lastName = environment.demo.userShippingAddress.lastName;
-    const company = environment.demo.userShippingAddress.company;
-    const streetAddress = environment.demo.userShippingAddress.streetAddress;
-    const stateValue = "5";
-    const city = environment.demo.userShippingAddress.city;
-    const postcode = environment.demo.userShippingAddress.zipPostal;
-    const phoneNumber = DataGenerator.generateRandomNumber(300);
-
-    await ShippingAdressPage.enterFirstName(firstName);
-    await ShippingAdressPage.enterLastName(lastName);
-    await ShippingAdressPage.enterCompany(company);
-    await ShippingAdressPage.enterStreetAddress(streetAddress);
-    await ShippingAdressPage.selectState(stateValue);
-    await ShippingAdressPage.enterCity(city);
-    await ShippingAdressPage.enterPostcode(postcode);
-    await ShippingAdressPage.enterTelephone(phoneNumber);
-    await ShippingAdressPage.selectShippingMethod();
-});
-
-Then('El usuario ingresa el Teléfono con letras', async function () {
-    console.log("El usuario ingresa el Teléfono con letras");
-    await DriverFactory.myDriver.sleep(4000);
-    await DriverFactory.myDriver.wait(until.urlContains('https://magento2-demo.magebit.com/checkout/#shipping'), configuration.browser.timeout);
-
-    const firstName = environment.demo.userShippingAddress.firstName;
-    const lastName = environment.demo.userShippingAddress.lastName;
-    const company = environment.demo.userShippingAddress.company;
-    const streetAddress = environment.demo.userShippingAddress.streetAddress;
-    const stateValue = "5";
-    const city = environment.demo.userShippingAddress.city;
-    const postcode = environment.demo.userShippingAddress.zipPostal;
-    const phoneNumber = DataGenerator.generateLetters(20);
-
-    await ShippingAdressPage.enterFirstName(firstName);
-    await ShippingAdressPage.enterLastName(lastName);
-    await ShippingAdressPage.enterCompany(company);
-    await ShippingAdressPage.enterStreetAddress(streetAddress);
-    await ShippingAdressPage.selectState(stateValue);
-    await ShippingAdressPage.enterCity(city);
-    await ShippingAdressPage.enterPostcode(postcode);
-    await ShippingAdressPage.enterTelephone(phoneNumber);
-    await ShippingAdressPage.selectShippingMethod();
-});
-
-Then('El usuario ingresa el Teléfono con alfanumericos', async function () {
-    console.log("El usuario ingresa el Teléfono con alfanumericos");
-    await DriverFactory.myDriver.sleep(4000);
-    await DriverFactory.myDriver.wait(until.urlContains('https://magento2-demo.magebit.com/checkout/#shipping'), configuration.browser.timeout);
-
-    const firstName = environment.demo.userShippingAddress.firstName;
-    const lastName = environment.demo.userShippingAddress.lastName;
-    const company = environment.demo.userShippingAddress.company;
-    const streetAddress = environment.demo.userShippingAddress.streetAddress;
-    const stateValue = "5";
-    const city = environment.demo.userShippingAddress.city;
-    const postcode = environment.demo.userShippingAddress.zipPostal;
-    const phoneNumber = DataGenerator.generateAlphanumeric(20);
 
     await ShippingAdressPage.enterFirstName(firstName);
     await ShippingAdressPage.enterLastName(lastName);
