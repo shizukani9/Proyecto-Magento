@@ -23,16 +23,16 @@ Then('La dirección debe guardarse correctamente sin errores', async function ()
 
 Then('Se muestra un mensaje de error', async function () {
     console.log("Se muestra un mensaje de error");
-    const errorMessageFirstName2 = await DriverFactory.myDriver.wait(until.elementLocated(ShippingAdressPage.errorMessageFirstName2),configuration.browser.timeout);
-    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", errorMessageFirstName2);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(errorMessageFirstName2));
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(errorMessageFirstName2));
-    
-    const expectedMessage = "Please enter only letters";
-    const messageText = await this.getErrorMessageFirstNameEmpty();
+    const errorMessageFirstName2 = await DriverFactory.myDriver.findElement(ShippingAdressPage.errorMessageFirstName2);
+    const expectedMessage = "Error message";
+    if (await errorMessageFirstName2.isDisplayed()) {
+        const messageText = await errorMessageFirstName2.getText();
         if (messageText.trim() !== expectedMessage) {
             throw new Error(`El mensaje obtenido fue: "${messageText}", pero se esperaba: "${expectedMessage}".`);
         }
+    } else {
+        throw new Error('El mensaje de error no se mostró como se esperaba.');
+    }
 });
 
 Then('Se muestra un mensaje de error que el campo requerido', async function () {
