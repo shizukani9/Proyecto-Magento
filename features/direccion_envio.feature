@@ -408,9 +408,6 @@ Scenario: DE-37: Verificar que cuando se ingresa un Código Postal (Zip/Postal C
         And El usuario guarda la dirección
         And Se muestra un mensaje de error
 
-
-
-
 @createAccount @deleteAccount @funcional_Positivo @DE-38 @Iteracion2 @pass @shopping
 Scenario: DE-38: Verificar que cuando se ingresa un Número de Teléfono (Phone Number) con 7 dígitos entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
