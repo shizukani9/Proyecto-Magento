@@ -44,6 +44,7 @@ Then('La cantidad de productos en el carrito debe actualizarse en la pagina Chec
     await DriverFactory.myDriver.sleep(2000); 
     await DriverFactory.myDriver.get("https://magento2-demo.magebit.com/checkout/cart/");
     await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/checkout/cart/"), configuration.browser.extendedTimeout);
+    await DriverFactory.myDriver.sleep(2000); 
 });
 
 Then('El usuario modifica la cantidad de uno de los productos', async function () {
