@@ -51,16 +51,21 @@ Then('Se muestra un mensaje de error que el campo requerido', async function () 
 
 Then('Se muestra un mensaje de error de mas de 255 caracteres', async function () {
     console.log("Se muestra un mensaje de error de mas de 255 caracteres");
-    const errorMessageFirstName1 = await DriverFactory.myDriver.wait(until.elementLocated(ShippingAdressPage.errorMessageFirstName1),configuration.browser.timeout);
-    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", errorMessageFirstName1);
-    await DriverFactory.myDriver.wait(until.elementIsVisible(errorMessageFirstName1), configuration.browser.timeout);
-    await DriverFactory.myDriver.wait(until.elementIsEnabled(errorMessageFirstName1), configuration.browser.timeout);
-   
-    const expectedMessage = "Please enter less or equal than 255 symbols.";
-    const messageText = await errorMessageFirstName1.getText();
-        if (messageText  !== expectedMessage) {
-            throw new Error(`El mensaje obtenido fue: "${messageText }", pero se esperaba: "${expectedMessage}".`);
+    const shortTimeout = 3000; 
+    try {
+        const errorMessageFirstName1 = await DriverFactory.myDriver.wait(until.elementLocated(ShippingAdressPage.errorMessageFirstName1),shortTimeout);
+        await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", errorMessageFirstName1);
+        await DriverFactory.myDriver.wait(until.elementIsVisible(errorMessageFirstName1), configuration.browser.timeout);
+        await DriverFactory.myDriver.wait(until.elementIsEnabled(errorMessageFirstName1), configuration.browser.timeout);
+        const messageText = await errorMessageFirstName1.getText();
+        const expectedMessage = "Please enter less or equal than 255 symbols.";
+        if (messageText.trim() !== expectedMessage) {
+            throw new Error(`El mensaje obtenido fue: "${messageText}", pero se esperaba: "${expectedMessage}".`);
         }
+        console.log("El mensaje de error es correcto.");
+    } catch (error) {
+        throw new Error('El mensaje de error no se mostró como se esperaba dentro del tiempo límite.');
+    }
 });
 
 Then('El usuario ingresa el nombre con solo 1 carácter', async function () {

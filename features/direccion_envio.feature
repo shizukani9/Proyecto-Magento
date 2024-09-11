@@ -254,7 +254,7 @@ Scenario: DE-23: Verificar que cuando el campo Dirección (Street Address) con n
         And El usuario guarda la dirección
         And Se muestra un mensaje de error
 
-@createAccount @deleteAccount @funcional_Positivo @DE-23 @Iteracion2 @fail @shopping
+@createAccount @deleteAccount @funcional_Positivo @DE-24 @Iteracion2 @fail @shopping
 Scenario: DE-24: Verificar que cuando el campo Dirección (Street Address) con alfanumérico entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -450,7 +450,7 @@ Scenario: DE-41: Verificar que cuando se ingresa un Número de Teléfono (Phone 
     Then El usuario procede a confirmar el producto para la compra
     Then El usuario ingresa el Teléfono con letras
         And El usuario guarda la dirección
-        And And Se muestra un mensaje de error
+        And Se muestra un mensaje de error
 
 @createAccount @deleteAccount @funcional_Positivo @DE-42 @Iteracion2 @fail @shopping
 Scenario: DE-42: Verificar que cuando se ingresa un Número de Teléfono (Phone Number) con caracteres alfanuméricos entonces se muestra un mensaje de error.
@@ -461,4 +461,4 @@ Scenario: DE-42: Verificar que cuando se ingresa un Número de Teléfono (Phone 
     Then El usuario procede a confirmar el producto para la compra
     Then El usuario ingresa el Teléfono con alfanumericos
         And El usuario guarda la dirección
-        And And Se muestra un mensaje de error
+        And Se muestra un mensaje de error
