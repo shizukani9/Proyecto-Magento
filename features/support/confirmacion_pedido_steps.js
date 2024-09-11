@@ -41,16 +41,17 @@ Then('El usuario visualiza detalles del pedido', async function () {
 
 Then('El usuario ve un mensaje de agradecimiento de compra', async function () {
     console.log("El usuario ve un mensaje de agradecimiento de compra");
+    await DriverFactory.myDriver.wait(until.urlIs('https://magento2-demo.magebit.com/checkout/onepage/success/'),configuration.browser.extendedTimeout);
+    
     const expectMessage = "Thank you for your purchase!";
-    const thankYouMessageElement = await DriverFactory.myDriver.wait(
-        until.elementLocated(CheckoutSucessPage.thankYouMessageElement),
-        configuration.browser.timeout
-    );
+    const thankYouMessageElement = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutSucessPage.thankYouMessage),configuration.browser.timeout);
+    await DriverFactory.myDriver.wait(until.elementIsVisible(thankYouMessageElement),configuration.browser.timeout);
+    await DriverFactory.myDriver.wait(until.elementIsEnabled(thankYouMessageElement),configuration.browser.timeout);
 
-     const actualMessage = await thankYouMessageElement.getText();
-     if (actualMessage.trim() === expectMessage) {
+    const actualMessage = await thankYouMessageElement.getText();
+    if (actualMessage.trim() == expectMessage) {
          console.log("El mensaje de agradecimiento es correcto.");
-     } else {
+    } else {
          throw new Error(`El mensaje de agradecimiento no coincide. Se esperaba: "${expectMessage}", pero se obtuvo: "${actualMessage.trim()}"`);
-     }
+    }
 });

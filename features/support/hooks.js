@@ -6,6 +6,7 @@ const DriverFactory = require("../../core/ui/driverFactory");
 const CustomerloginPage = require("../../main/ui/customer_login_page");
 const CreateAnAccountPage = require('../../main/ui/create_an_account_page');
 const MyAccountCustomerPage = require("../../main/ui/my_account_customer_page");
+const DataGenerator = require("../../utils/dataGenerator");
 const { until, Key, By } = require("selenium-webdriver");
 var {setDefaultTimeout} = require('@cucumber/cucumber');
 const UserService = require('../../main/api/userService');
