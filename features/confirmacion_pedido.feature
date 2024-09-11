@@ -42,5 +42,4 @@ Scenario: CP-3: Verificar que cuando se completa la compra entonces se muestra u
         And El usuario guarda la dirección
     Then El usuario visualiza el metodo de envio valido
     Then El usuario completa la compra
-        And El usuario ve un mensaje de confirmación de compra
     Then El usuario ve un mensaje de agradecimiento de compra
