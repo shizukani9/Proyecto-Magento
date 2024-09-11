@@ -42,6 +42,7 @@ Before( { tags: "@login" }, async function(scenario){
 Before({ tags: "@createAccount" }, async function() {
     console.log("Starting Create Account Process");
     await DriverFactory.myDriver.get("https://magento2-demo.magebit.com/customer/account/create/");
+    await DriverFactory.myDriver.sleep(2000);
     await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/customer/account/create/"), configuration.browser.timeout);
 
     const firstNameInput = await DriverFactory.myDriver.wait(until.elementLocated(CreateAnAccountPage.firstNameInput), configuration.browser.timeout);

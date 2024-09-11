@@ -15,6 +15,8 @@ class ShippingAdressPage {
     shippingMethodRadio = By.css('input[type="radio"][value="flatrate_flatrate"]');
     shippingMethodTableRateRadio = By.css('input[type="radio"][value="tablerate_bestway"]');
     nextButton = By.css('button[data-role="opc-continue"]');
+    errorMessageFirstName1 = By.css('span[data-bind="text: element.error"]');
+    errorMessageFirstName2 = By.css('div.field-error[id^="error-"]');
 
     async enterFirstName(firstName) {
         const firstNameInput = await DriverFactory.myDriver.wait(until.elementLocated(this.firstNameInput), configuration.browser.timeout);

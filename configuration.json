@@ -3,7 +3,7 @@
         "name": "chrome",
         "headless": false,
         "timeout": 50000,
-        "extendedTimeout": 100000,
+        "extendedTimeout": 70000,
         "maxWindows": false,
         "resolution": {
             "width": 1366,
