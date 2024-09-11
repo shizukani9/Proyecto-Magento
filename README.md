@@ -43,10 +43,25 @@ Este proyecto tiene como objetivo automatizar las pruebas de regresión para un 
 
 ### Ejecución de las Pruebas
 
-Para ejecutar las pruebas de automatización, utiliza el siguiente comando:
+Para ejecutar las pruebas de automatización de la Iteración 1, utiliza el siguiente comando:
 
 ```bash
 npx cucumber-js --tags "@Iteracion1"
+```
+Para ejecutar las pruebas de automatización de la Iteración 2, utiliza el siguiente comando:
+
+```bash
+npx cucumber-js --tags "@Iteracion2"
+```
+Para ejecutar las pruebas de automatización de la Iteración 3, utiliza el siguiente comando:
+
+```bash
+npx cucumber-js --tags "@Iteracion3"
+```
+Para ejecutar las pruebas de automatización de la Iteración 4, utiliza el siguiente comando:
+
+```bash
+npx cucumber-js --tags "@Iteracion4"
 ```
 
 Este comando ejecutará todos los escenarios definidos en los archivos `.feature` utilizando Cucumber.
@@ -55,7 +70,7 @@ Este comando ejecutará todos los escenarios definidos en los archivos `.feature
 Al finalizar las pruebas, un informe HTML se generará automáticamente en la carpeta reports/. Puedes abrir el informe en tu navegador:
 
 ```bash
-open reports/cucumber-report-Iteracion1.html
+open reports/cucumber-report.html
 ```
 
 ### Generación de Datos
