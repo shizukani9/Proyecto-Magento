@@ -13,8 +13,8 @@ yarn-error.log*
 .env
 
 # Cucumber report files
-reports/
-cucumber_report.json
+#reports/
+#cucumber_report.json
 
 # Selenium files
 selenium-debug.log
