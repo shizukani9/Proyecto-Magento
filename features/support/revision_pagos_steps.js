@@ -81,11 +81,9 @@ Then('El usuario ve un mensaje de error de código de descuento en payment', asy
     console.log("El usuario ve un mensaje de error de código de descuento en payment");
     await DriverFactory.myDriver.sleep(2000); 
 
-
     const errorMessageElement = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutPaymentPage.errorMessageCoupon), configuration.browser.timeout);
     await DriverFactory.myDriver.wait(until.elementIsVisible(errorMessageElement), configuration.browser.timeout);
     await DriverFactory.myDriver.wait(until.elementIsEnabled(errorMessageElement), configuration.browser.timeout);
-        
 
     const couponCode = environment.demo.website.incorrectCouponCode;
     const expectedMessage = `The coupon code "${couponCode}" is not valid.`;

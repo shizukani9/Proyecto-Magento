@@ -1,7 +1,7 @@
 @ui
 Feature: Direccion de envio 
 
-@createAccount @deleteAccount @funcional_Positivo @DE-1 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Positivo @Boundary_test @DE-1 @Iteracion2 @pass @shopping
 Scenario: DE-1: Verificar que cuando se ingresa un Nombre (First Name) con 1 carácter entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -12,7 +12,7 @@ Scenario: DE-1: Verificar que cuando se ingresa un Nombre (First Name) con 1 car
         And El usuario guarda la dirección
         And La dirección debe guardarse correctamente sin errores
 
-@createAccount @deleteAccount @funcional_Positivo @DE-2 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Positivo @Boundary_test @DE-2 @Iteracion2 @pass @shopping
 Scenario: DE-2: Verificar que cuando se ingresa un Nombre (First Name) con 255 caracteres entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -23,7 +23,7 @@ Scenario: DE-2: Verificar que cuando se ingresa un Nombre (First Name) con 255 c
         And El usuario guarda la dirección
         And La dirección debe guardarse correctamente sin errores
 
-@createAccount @deleteAccount @funcional_Positivo @DE-3 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-3 @Iteracion2 @pass @shopping
 Scenario: DE-3: Verificar que cuando se ingresa un Nombre (First Name) con más de 255 caracteres entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -34,7 +34,7 @@ Scenario: DE-3: Verificar que cuando se ingresa un Nombre (First Name) con más 
         And El usuario guarda la dirección
         And Se muestra un mensaje de error de mas de 255 caracteres
 
-@createAccount @deleteAccount @funcional_Positivo @DE-4 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-4 @Iteracion2 @pass @shopping
 Scenario: DE-4: Verificar que cuando se ingresa un Nombre (First Name) vacío entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -45,7 +45,7 @@ Scenario: DE-4: Verificar que cuando se ingresa un Nombre (First Name) vacío en
         And El usuario guarda la dirección
         And Se muestra un mensaje de error que el campo requerido
 
-@createAccount @deleteAccount @funcional_Positivo @DE-5 @Iteracion2 @fail @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-5 @Iteracion2 @fail @shopping
 Scenario: DE-5: Verificar que cuando se ingresa un Nombre (First Name) con números entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -56,7 +56,7 @@ Scenario: DE-5: Verificar que cuando se ingresa un Nombre (First Name) con núme
         And El usuario guarda la dirección
         And Se muestra un mensaje de error
 
-@createAccount @deleteAccount @funcional_Positivo @DE-6 @Iteracion2 @fail @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-6 @Iteracion2 @fail @shopping
 Scenario: DE-6: Verificar que cuando se ingresa un Nombre (First Name) con caracteres alfanuméricos entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -67,7 +67,7 @@ Scenario: DE-6: Verificar que cuando se ingresa un Nombre (First Name) con carac
         And El usuario guarda la dirección
         And Se muestra un mensaje de error
 
-@createAccount @deleteAccount @funcional_Positivo @DE-7 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-7 @Iteracion2 @pass @shopping
 Scenario: DE-7: Verificar que cuando se ingresa un Apellido (Last Name) con 1 carácter entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -78,7 +78,7 @@ Scenario: DE-7: Verificar que cuando se ingresa un Apellido (Last Name) con 1 ca
         And El usuario guarda la dirección
         And La dirección debe guardarse correctamente sin errores
 
-@createAccount @deleteAccount @funcional_Positivo @DE-8 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Positivo @Boundary_test @DE-8 @Iteracion2 @pass @shopping
 Scenario: DE-8: Verificar que cuando se ingresa un Apellido (Last Name) con 255 caracteres entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -89,7 +89,7 @@ Scenario: DE-8: Verificar que cuando se ingresa un Apellido (Last Name) con 255 
         And El usuario guarda la dirección
         And La dirección debe guardarse correctamente sin errores
 
-@createAccount @deleteAccount @funcional_Positivo @DE-9 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-9 @Iteracion2 @pass @shopping
 Scenario: DE-9: Verificar que cuando se ingresa un Apellido (Last Name) con más de 255 caracteres entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -100,7 +100,7 @@ Scenario: DE-9: Verificar que cuando se ingresa un Apellido (Last Name) con más
         And El usuario guarda la dirección
         And Se muestra un mensaje de error de mas de 255 caracteres
 
-@createAccount @deleteAccount @funcional_Positivo @DE-10 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-10 @Iteracion2 @pass @shopping
 Scenario: DE-10: Verificar que cuando se ingresa un Apellido (Last Name) vacío entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -111,7 +111,7 @@ Scenario: DE-10: Verificar que cuando se ingresa un Apellido (Last Name) vacío 
         And El usuario guarda la dirección
         And Se muestra un mensaje de error que el campo requerido
 
-@createAccount @deleteAccount @funcional_Positivo @DE-11 @Iteracion2 @fail @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-11 @Iteracion2 @fail @shopping
 Scenario: DE-11: Verificar que cuando se ingresa un Apellido (Last Name) con números entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -122,7 +122,7 @@ Scenario: DE-11: Verificar que cuando se ingresa un Apellido (Last Name) con nú
         And El usuario guarda la dirección
         And Se muestra un mensaje de error
 
-@createAccount @deleteAccount @funcional_Positivo @DE-12 @Iteracion2 @fail @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-12 @Iteracion2 @fail @shopping
 Scenario: DE-12: Verificar que cuando se ingresa un Apellido (Last Name) con caracteres alfanuméricos entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -133,7 +133,7 @@ Scenario: DE-12: Verificar que cuando se ingresa un Apellido (Last Name) con car
         And El usuario guarda la dirección
         And Se muestra un mensaje de error
 
-@createAccount @deleteAccount @funcional_Positivo @DE-13 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Positivo @Boundary_test @DE-13 @Iteracion2 @pass @shopping
 Scenario: DE-13: Verificar que cuando el campo Compañía (Company) con 1 carácter entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -144,7 +144,7 @@ Scenario: DE-13: Verificar que cuando el campo Compañía (Company) con 1 carác
         And El usuario guarda la dirección
         And La dirección debe guardarse correctamente sin errores
 
-@createAccount @deleteAccount @funcional_Positivo @DE-14 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Positivo @Boundary_test @DE-14 @Iteracion2 @pass @shopping
 Scenario: DE-14: Verificar que cuando el campo Compañía (Company) con 255 caracteres entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -155,7 +155,7 @@ Scenario: DE-14: Verificar que cuando el campo Compañía (Company) con 255 cara
         And El usuario guarda la dirección
         And La dirección debe guardarse correctamente sin errores
 
-@createAccount @deleteAccount @funcional_Positivo @DE-15 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-15 @Iteracion2 @pass @shopping
 Scenario: DE-15: Verificar que cuando el campo Compañía (Company) con más 255 caracteres entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -166,7 +166,7 @@ Scenario: DE-15: Verificar que cuando el campo Compañía (Company) con más 255
         And El usuario guarda la dirección
         And Se muestra un mensaje de error de mas de 255 caracteres
 
-@createAccount @deleteAccount @funcional_Positivo @DE-16 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Positivo @Boundary_test @DE-16 @Iteracion2 @pass @shopping
 Scenario: DE-16: Verificar que cuando el campo Compañía (Company) está vacío entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -177,7 +177,7 @@ Scenario: DE-16: Verificar que cuando el campo Compañía (Company) está vacío
         And El usuario guarda la dirección
         And La dirección debe guardarse correctamente sin errores
 
-@createAccount @deleteAccount @funcional_Positivo @DE-17 @Iteracion2 @fail @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-17 @Iteracion2 @fail @shopping
 Scenario: DE-17: Verificar que cuando el campo Compañía (Company) con números entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -188,7 +188,7 @@ Scenario: DE-17: Verificar que cuando el campo Compañía (Company) con números
         And El usuario guarda la dirección
         And Se muestra un mensaje de error
 
-@createAccount @deleteAccount @funcional_Positivo @DE-18 @Iteracion2 @fail @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-18 @Iteracion2 @fail @shopping
 Scenario: DE-18: Verificar que cuando el campo Compañía (Company) con alfanumérico entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -199,7 +199,7 @@ Scenario: DE-18: Verificar que cuando el campo Compañía (Company) con alfanum�
         And El usuario guarda la dirección
         And Se muestra un mensaje de error
 
-@createAccount @deleteAccount @funcional_Positivo @DE-19 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Positivo @Boundary_test @DE-19 @Iteracion2 @pass @shopping
 Scenario: DE-19: Verificar que cuando se ingresa una Dirección (Street Address) con 5 caracteres entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -210,7 +210,7 @@ Scenario: DE-19: Verificar que cuando se ingresa una Dirección (Street Address)
         And El usuario guarda la dirección
         And La dirección debe guardarse correctamente sin errores
 
-@createAccount @deleteAccount @funcional_Positivo @DE-20 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Positivo @Boundary_test @DE-20 @Iteracion2 @pass @shopping
 Scenario: DE-20: Verificar que cuando se ingresa una Dirección (Street Address) con 255 caracteres entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -221,7 +221,7 @@ Scenario: DE-20: Verificar que cuando se ingresa una Dirección (Street Address)
         And El usuario guarda la dirección
         And La dirección debe guardarse correctamente sin errores
 
-@createAccount @deleteAccount @funcional_Positivo @DE-21 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-21 @Iteracion2 @pass @shopping
 Scenario: DE-21: Verificar que cuando se ingresa una Dirección (Street Address) con más de 255 caracteres entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -232,7 +232,7 @@ Scenario: DE-21: Verificar que cuando se ingresa una Dirección (Street Address)
         And El usuario guarda la dirección
         And Se muestra un mensaje de error de mas de 255 caracteres
 
-@createAccount @deleteAccount @funcional_Positivo @DE-22 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-22 @Iteracion2 @pass @shopping
 Scenario: DE-22: Verificar que cuando se ingresa una Dirección (Street Address) vacío entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -243,7 +243,7 @@ Scenario: DE-22: Verificar que cuando se ingresa una Dirección (Street Address)
         And El usuario guarda la dirección
         And Se muestra un mensaje de error que el campo requerido
 
-@createAccount @deleteAccount @funcional_Positivo @DE-23 @Iteracion2 @fail @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-23 @Iteracion2 @fail @shopping
 Scenario: DE-23: Verificar que cuando el campo Dirección (Street Address) con números entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -254,7 +254,7 @@ Scenario: DE-23: Verificar que cuando el campo Dirección (Street Address) con n
         And El usuario guarda la dirección
         And Se muestra un mensaje de error
 
-@createAccount @deleteAccount @funcional_Positivo @DE-24 @Iteracion2 @fail @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-24 @Iteracion2 @fail @shopping
 Scenario: DE-24: Verificar que cuando el campo Dirección (Street Address) con alfanumérico entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -265,7 +265,7 @@ Scenario: DE-24: Verificar que cuando el campo Dirección (Street Address) con a
         And El usuario guarda la dirección
         And Se muestra un mensaje de error
 
-@createAccount @deleteAccount @funcional_Positivo @DE-25 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Positivo @Boundary_test @DE-25 @Iteracion2 @pass @shopping
 Scenario: DE-25: Verificar que cuando se ingresa el nombre de una Ciudad (City) con 1 carácter entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -276,7 +276,7 @@ Scenario: DE-25: Verificar que cuando se ingresa el nombre de una Ciudad (City) 
         And El usuario guarda la dirección
         And La dirección debe guardarse correctamente sin errores
 
-@createAccount @deleteAccount @funcional_Positivo @DE-26 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Positivo @Boundary_test @DE-26 @Iteracion2 @pass @shopping
 Scenario: DE-26: Verificar que cuando se ingresa una Ciudad (City) con 255 caracteres entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -287,7 +287,7 @@ Scenario: DE-26: Verificar que cuando se ingresa una Ciudad (City) con 255 carac
         And El usuario guarda la dirección
         And La dirección debe guardarse correctamente sin errores
 
-@createAccount @deleteAccount @funcional_Positivo @DE-27 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-27 @Iteracion2 @pass @shopping
 Scenario: DE-27: Verificar que cuando se ingresa una Ciudad (City) con más de 255 caracteres entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -298,7 +298,7 @@ Scenario: DE-27: Verificar que cuando se ingresa una Ciudad (City) con más de 2
         And El usuario guarda la dirección
         And Se muestra un mensaje de error de mas de 255 caracteres
 
-@createAccount @deleteAccount @funcional_Positivo @DE-28 @Iteracion2 @fail @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-28 @Iteracion2 @fail @shopping
 Scenario: DE-28: Verificar que cuando se ingresa una Ciudad (City) con números entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -309,7 +309,7 @@ Scenario: DE-28: Verificar que cuando se ingresa una Ciudad (City) con números 
         And El usuario guarda la dirección
         And Se muestra un mensaje de error
 
-@createAccount @deleteAccount @funcional_Positivo @DE-29 @Iteracion2 @fail @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-29 @Iteracion2 @fail @shopping
 Scenario: DE-29: Verificar que cuando se ingresa una Ciudad (City) con caracteres alfanuméricos entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -320,7 +320,7 @@ Scenario: DE-29: Verificar que cuando se ingresa una Ciudad (City) con caractere
         And El usuario guarda la dirección
         And Se muestra un mensaje de error
 
-@createAccount @deleteAccount @funcional_Positivo @DE-30 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Positivo @Boundary_test @DE-30 @Iteracion2 @pass @shopping
 Scenario: DE-30: Verificar que cuando se selecciona una Estado/Provincia (State/Province) entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -331,7 +331,7 @@ Scenario: DE-30: Verificar que cuando se selecciona una Estado/Provincia (State/
         And El usuario guarda la dirección
         And La dirección debe guardarse correctamente sin errores
 
-@createAccount @deleteAccount @funcional_Positivo @DE-31 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-31 @Iteracion2 @pass @shopping
 Scenario: DE-31: Verificar que cuando no se selecciona una Estado/Provincia (State/Province) entonces la dirección no se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -342,7 +342,7 @@ Scenario: DE-31: Verificar que cuando no se selecciona una Estado/Provincia (Sta
         And El usuario guarda la dirección
         And Se muestra un mensaje de error que el campo requerido
 
-@createAccount @deleteAccount @funcional_Positivo @DE-32 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Positivo @Boundary_test @DE-32 @Iteracion2 @pass @shopping
 Scenario: DE-32: Verificar que cuando se ingresa un Código Postal (Zip/Postal Code) con 5 caracteres entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -353,7 +353,7 @@ Scenario: DE-32: Verificar que cuando se ingresa un Código Postal (Zip/Postal C
         And El usuario guarda la dirección
         And La dirección debe guardarse correctamente sin errores
 
-@createAccount @deleteAccount @funcional_Positivo @DE-33 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Positivo @Boundary_test @DE-33 @Iteracion2 @pass @shopping
 Scenario: DE-33: Verificar que cuando se ingresa un Código Postal (Zip/Postal Code) con 255 caracteres númericos entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -364,7 +364,7 @@ Scenario: DE-33: Verificar que cuando se ingresa un Código Postal (Zip/Postal C
         And El usuario guarda la dirección
         And La dirección debe guardarse correctamente sin errores
 
-@createAccount @deleteAccount @funcional_Positivo @DE-34 @Iteracion2 @fail @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-34 @Iteracion2 @fail @shopping
 Scenario: DE-34: Verificar que cuando se ingresa un Código Postal (Zip/Postal Code) con más de 255 caracteres numéricos entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -375,7 +375,7 @@ Scenario: DE-34: Verificar que cuando se ingresa un Código Postal (Zip/Postal C
         And El usuario guarda la dirección
         And Se muestra un mensaje de error de mas de 255 caracteres
 
-@createAccount @deleteAccount @funcional_Positivo @DE-35 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-35 @Iteracion2 @pass @shopping
 Scenario: DE-35: Verificar que cuando se ingresa un Código Postal (Zip/Postal Code) vacío entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -386,7 +386,7 @@ Scenario: DE-35: Verificar que cuando se ingresa un Código Postal (Zip/Postal C
         And El usuario guarda la dirección
         And Se muestra un mensaje de error que el campo requerido
 
-@createAccount @deleteAccount @funcional_Positivo @DE-36 @Iteracion2 @fail @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-36 @Iteracion2 @fail @shopping
 Scenario: DE-36: Verificar que cuando se ingresa un Código Postal (Zip/Postal Code) con letras entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -397,7 +397,7 @@ Scenario: DE-36: Verificar que cuando se ingresa un Código Postal (Zip/Postal C
         And El usuario guarda la dirección
         And Se muestra un mensaje de error
 
-@createAccount @deleteAccount @funcional_Positivo @DE-37 @Iteracion2 @fail @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-37 @Iteracion2 @fail @shopping
 Scenario: DE-37: Verificar que cuando se ingresa un Código Postal (Zip/Postal Code) con alfanumérico entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -408,7 +408,7 @@ Scenario: DE-37: Verificar que cuando se ingresa un Código Postal (Zip/Postal C
         And El usuario guarda la dirección
         And Se muestra un mensaje de error
 
-@createAccount @deleteAccount @funcional_Positivo @DE-38 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Positivo @Boundary_test @DE-38 @Iteracion2 @pass @shopping
 Scenario: DE-38: Verificar que cuando se ingresa un Número de Teléfono (Phone Number) con 7 dígitos entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -419,7 +419,7 @@ Scenario: DE-38: Verificar que cuando se ingresa un Número de Teléfono (Phone 
         And El usuario guarda la dirección
         And La dirección debe guardarse correctamente sin errores
 
-@createAccount @deleteAccount @funcional_Positivo @DE-39 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Positivo @Boundary_test @DE-39 @Iteracion2 @pass @shopping
 Scenario: DE-39: Verificar que cuando se ingresa un Número de Teléfono (Phone Number) con 15 dígitos entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -430,7 +430,7 @@ Scenario: DE-39: Verificar que cuando se ingresa un Número de Teléfono (Phone 
         And El usuario guarda la dirección
         And La dirección debe guardarse correctamente sin errores
 
-@createAccount @deleteAccount @funcional_Positivo @DE-40 @Iteracion2 @fail @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-40 @Iteracion2 @fail @shopping
 Scenario: DE-40: Verificar que cuando se ingresa un Número de Teléfono (Phone Number) con más de 255 dígitos entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -441,7 +441,7 @@ Scenario: DE-40: Verificar que cuando se ingresa un Número de Teléfono (Phone 
         And El usuario guarda la dirección
         And Se muestra un mensaje de error de mas de 255 caracteres
 
-@createAccount @deleteAccount @funcional_Positivo @DE-41 @Iteracion2 @fail @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-41 @Iteracion2 @fail @shopping
 Scenario: DE-41: Verificar que cuando se ingresa un Número de Teléfono (Phone Number) con letras entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -452,7 +452,7 @@ Scenario: DE-41: Verificar que cuando se ingresa un Número de Teléfono (Phone 
         And El usuario guarda la dirección
         And Se muestra un mensaje de error
 
-@createAccount @deleteAccount @funcional_Positivo @DE-42 @Iteracion2 @fail @shopping
+@createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-42 @Iteracion2 @fail @shopping
 Scenario: DE-42: Verificar que cuando se ingresa un Número de Teléfono (Phone Number) con caracteres alfanuméricos entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection

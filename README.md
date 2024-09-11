@@ -64,6 +64,12 @@ Para ejecutar las pruebas de automatización de la Iteración 4, utiliza el sigu
 npx cucumber-js --tags "@Iteracion4"
 ```
 
+Para ejecutar las pruebas de automatización, utiliza el siguiente comando:
+
+```bash
+npx cucumber-js --tags "@shopping"
+```
+
 Este comando ejecutará todos los escenarios definidos en los archivos `.feature` utilizando Cucumber.
 
 ### Ver el Informe de Pruebas
