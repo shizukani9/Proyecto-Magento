@@ -15,6 +15,7 @@ const { until, By, Select } = require('selenium-webdriver');
 
 Then('La dirección debe guardarse correctamente sin errores', async function () {
     console.log("La dirección debe guardarse correctamente sin errores");
+    await DriverFactory.myDriver.sleep(2000);
     await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/checkout/#payment"), configuration.browser.extendedTimeout);
     const expectedUrl = "https://magento2-demo.magebit.com/checkout/#payment";
     const currentUrl = await DriverFactory.myDriver.getCurrentUrl();

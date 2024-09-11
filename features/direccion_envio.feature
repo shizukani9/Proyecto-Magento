@@ -331,7 +331,7 @@ Scenario: DE-30: Verificar que cuando se selecciona una Estado/Provincia (State/
         And El usuario guarda la dirección
         And La dirección debe guardarse correctamente sin errores
 
-@createAccount @deleteAccount @funcional_Positivo @DE-31 @Iteracion2 @fail @shopping
+@createAccount @deleteAccount @funcional_Positivo @DE-31 @Iteracion2 @pass @shopping
 Scenario: DE-31: Verificar que cuando no se selecciona una Estado/Provincia (State/Province) entonces la dirección no se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -364,7 +364,7 @@ Scenario: DE-33: Verificar que cuando se ingresa un Código Postal (Zip/Postal C
         And El usuario guarda la dirección
         And La dirección debe guardarse correctamente sin errores
 
-@createAccount @deleteAccount @funcional_Positivo @DE-34 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Positivo @DE-34 @Iteracion2 @fail @shopping
 Scenario: DE-34: Verificar que cuando se ingresa un Código Postal (Zip/Postal Code) con más de 255 caracteres numéricos entonces la dirección se guarda correctamente.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
@@ -430,7 +430,7 @@ Scenario: DE-39: Verificar que cuando se ingresa un Número de Teléfono (Phone 
         And El usuario guarda la dirección
         And La dirección debe guardarse correctamente sin errores
 
-@createAccount @deleteAccount @funcional_Positivo @DE-40 @Iteracion2 @pass @shopping
+@createAccount @deleteAccount @funcional_Positivo @DE-40 @Iteracion2 @fail @shopping
 Scenario: DE-40: Verificar que cuando se ingresa un Número de Teléfono (Phone Number) con más de 255 dígitos entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
