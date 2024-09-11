@@ -37,14 +37,14 @@ When('El usuario añade un producto al carrito', async function () {
     await DriverFactory.myDriver.wait(until.elementIsVisible(firstAddToCartButton), configuration.browser.timeout); 
     await DriverFactory.myDriver.wait(until.elementIsEnabled(firstAddToCartButton), configuration.browser.timeout); 
     await firstAddToCartButton.click();
+    await DriverFactory.myDriver.sleep(2000); 
 });
 
 Then('La cantidad de productos en el carrito debe actualizarse en la pagina Checkout cart', async function () {
     console.log("La cantidad de productos en el carrito debe actualizarse en la pagina Checkout cart");
     await DriverFactory.myDriver.sleep(2000); 
     await DriverFactory.myDriver.get("https://magento2-demo.magebit.com/checkout/cart/");
-    await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/checkout/cart/"), configuration.browser.extendedTimeout);
-    await DriverFactory.myDriver.sleep(2000); 
+    await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/checkout/cart/"), configuration.browser.extendedTimeout); 
 });
 
 Then('El usuario modifica la cantidad de uno de los productos', async function () {
