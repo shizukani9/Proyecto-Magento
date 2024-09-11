@@ -43,7 +43,7 @@ Scenario: RP-3: Verificar que cuando se aplica un código de descuento válido e
     Then El usuario completa la compra
         And El usuario ve un mensaje de confirmación de compra
 
-@createAccount @deleteAccount @funcional_Positivo @RP-4 @Iteracion3 @pass @shopping
+@createAccount @deleteAccount @funcional_Negativo @RP-4 @Iteracion3 @pass @shopping
 Scenario: RP-4: Verificar que cuando se aplica un código de descuento inválido entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
