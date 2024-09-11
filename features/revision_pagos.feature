@@ -12,6 +12,8 @@ Scenario: RP-1: Verificar que cuando se llega a la pantalla de revisión del ped
         And El usuario guarda la dirección
         And La dirección debe guardarse correctamente sin errores
     Then El usuario visualiza un resumen detallado del pedido
+    Then El usuario completa la compra
+        And El usuario ve un mensaje de confirmación de compra
 
 @createAccount @deleteAccount @funcional_Positivo @RP-2 @Iteracion3 @pass @shopping
 Scenario: RP-2: Verificar que cuando se selecciona un método de pago válido entonces se puede completar la transacción.
@@ -53,3 +55,5 @@ Scenario: RP-4: Verificar que cuando se aplica un código de descuento inválido
     Then El usuario visualiza el metodo de envio valido
     Then El usuario ingresa el código no válido de descuento en el campo Código de descuento en payment
     And El usuario hace clic en Aplicar el descuento
+    Then El usuario completa la compra
+        And El usuario ve un mensaje de confirmación de compra

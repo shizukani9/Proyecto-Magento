@@ -16,6 +16,7 @@ const { until, By, Select } = require('selenium-webdriver');
 Given('El usuario está en la página de inicio', async function () {
     console.log("El usuario está en la página de inicio");
     const expectedUrl = "https://magento2-demo.magebit.com/";
+    await DriverFactory.myDriver.sleep(2000);
     await DriverFactory.myDriver.get(expectedUrl);
     const currentUrl = await DriverFactory.myDriver.getCurrentUrl();
     expect(currentUrl).to.equal(expectedUrl, currentUrl);
