@@ -156,7 +156,7 @@ Scenario: DE-14: Verificar que cuando el campo Compañía (Company) con 255 cara
         And La dirección debe guardarse correctamente sin errores
 
 @createAccount @deleteAccount @funcional_Negativo @Boundary_test @DE-15 @Iteracion2 @pass @shopping
-Scenario: DE-15: Verificar que cuando el campo Compañía (Company) con más 255 caracteres entonces la dirección se guarda correctamente.
+Scenario: DE-15: Verificar que cuando el campo Compañía (Company) con más 255 caracteres entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
     When El usuario añade un producto al carrito
