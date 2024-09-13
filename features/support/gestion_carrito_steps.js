@@ -73,9 +73,14 @@ Then('El precio total del carrito debe actualizarse correctamente', async functi
 
 When('El usuario elimina uno de los productos del carrito', async function () {
     console.log("El usuario elimina uno de los productos del carrito");
-    await CheckoutCarPage.waitForCartPageLoad();
-    await CheckoutCarPage.clickRemoveItemButton();
-    await CheckoutCarPage.waitForCartPageLoad();
+    await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/checkout/cart/"), configuration.browser.extendedTimeout);
+    const removeItemButton = await DriverFactory.myDriver.wait(until.elementLocated(CheckoutCarPage.removeItemButton), configuration.browser.extendedTimeout);
+    await DriverFactory.myDriver.executeScript("arguments[0].scrollIntoView(true);", removeItemButton);
+    await DriverFactory.myDriver.wait(until.elementIsVisible(removeItemButton), configuration.browser.extendedTimeout);
+    await DriverFactory.myDriver.wait(until.elementIsEnabled(removeItemButton), configuration.browser.extendedTimeout);
+    await removeItemButton.click();
+    await DriverFactory.myDriver.wait(until.stalenessOf(removeItemButton), configuration.browser.extendedTimeout);
+    await DriverFactory.myDriver.wait(until.urlIs("https://magento2-demo.magebit.com/checkout/cart/"), configuration.browser.extendedTimeout);
 });
 
 Then('El producto debe desaparecer del listado, se muestra un mensaje de confirmacion', async function () {
