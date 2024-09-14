@@ -13,6 +13,7 @@ yarn-error.log*
 .env
 
 # Cucumber report files
+cucumber-report.html
 #reports/
 #cucumber_report.json
 
