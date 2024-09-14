@@ -55,7 +55,7 @@ Scenario: GC-5: Verificar que cuando se ingresa una dirección de envío complet
         And El usuario ve un mensaje de confirmación de compra
 
 @createAccount @deleteAccount @funcional_Negativo @GC-6 @Iteracion1 @pass @shopping
-Scenario: GC-6: Verificar que cuando se aplica un código de descuento no válido en el carrito entonces el precio total se actualiza correctamente.
+Scenario: GC-6: Verificar que cuando se aplica un código de descuento no válido en el carrito entonces se muestra un mensaje de error.
     Given El usuario está en la página de inicio
         And El usuario navega a página de Yoga Collection
     When El usuario añade un producto al carrito
